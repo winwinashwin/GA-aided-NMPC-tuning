@@ -15,7 +15,7 @@ static void normalize(std::vector<double> &array)
 
 namespace ga::fitness
 {
-    ObjFunction::ObjFunction() : m_Weights{{0.2, 0.2, 0.2, 0.2, 0.2}},
+    ObjFunction::ObjFunction() : m_Weights{{0.2, 1.0, 0.4, 0.2, 0.2}},
                                  m_started(false),
                                  m_terminated(false),
                                  m_deltaN(0.05)
@@ -39,7 +39,7 @@ namespace ga::fitness
         // Integral Absolute Error(IAE) for the energy losses(EL)
         for (size_t i = 0; i < iterations; i++)
         {
-            metrics[0] += (i + 1) * abs(performance.cteData[i]);
+            metrics[0] += pow(performance.cteData[i], 2);
             metrics[1] += (i + 1) * abs(performance.ethetaData[i]);
             metrics[2] += (i + 1) * abs(performance.velErrData[i]);
 

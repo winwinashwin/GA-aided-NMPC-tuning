@@ -189,21 +189,23 @@ namespace model
 
                 omega = mpc_solns[0];
                 throttle = mpc_solns[1];
+                const double cost = mpc_solns[2];
 
                 const double speed = current_v + throttle * dt;
 
                 m_dModel.step(speed, omega);
+                const double velError = current_v - params.desired.vel;
 
                 m_jsonLogger.logX(px);
                 m_jsonLogger.logY(py);
-                m_jsonLogger.logVelError(current_v - params.desired.vel);
+                m_jsonLogger.logVelError(velError);
                 m_jsonLogger.logCte(current_cte);
                 m_jsonLogger.logEtheta(current_etheta);
-                m_jsonLogger.logCost(mpc_solns[2]);
+                m_jsonLogger.logCost(cost);
 
                 m_performance.cteData.push_back(current_cte);
                 m_performance.ethetaData.push_back(current_etheta);
-                m_performance.velErrData.push_back(params.desired.vel - current_v);
+                m_performance.velErrData.push_back(velError);
 
                 m_performance.translationalEL.push_back(pow(speed, 2) - pow(prevSpeed, 2));
                 m_performance.rotationalEL.push_back(pow(omega, 2) - pow(prevOmega, 2));

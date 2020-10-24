@@ -29,9 +29,10 @@ verifyOK
 consoleLog "Working on visualisation. This may take some time ..."
 python3.6 ${DATA_VIS_SCRIPT}
 
-filename=data_$(date +%Y-%m-%d--%H%M%S).tar.gz
-tar czf ${filename} data
-rm -rf data
+filename=data_$(date +%Y-%m-%d--%H%M%S)
+# tar czf ${filename} data
+# rm -rf data
+mv data ${filename}
 consoleLog "Data saved to ${filename}"
 
 verifyOK

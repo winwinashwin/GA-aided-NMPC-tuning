@@ -15,7 +15,7 @@ namespace ga
         m_genome.addChoromosome(config.weight_bounds.w_omega_d.first, config.weight_bounds.w_omega_d.second);
         m_genome.addChoromosome(config.weight_bounds.w_acc_d.first, config.weight_bounds.w_acc_d.second);
 
-        model::State s = {-8.0, 1.5, -0.6, 0.0, 0.0, 0.0};
+        model::State s = {-8.0, 0.5, -0.6, 0.0, 0.0, 0.0};
 
         setModelInitState(s);
     }
