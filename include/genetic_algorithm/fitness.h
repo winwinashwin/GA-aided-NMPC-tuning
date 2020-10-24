@@ -10,10 +10,14 @@
  */
 namespace ga::fitness
 {
+    typedef std::array<double, 5> darr5_t;
+
     class ObjFunction
     {
     public:
+        /// Delete copy constructor
         ObjFunction(const ObjFunction &) = delete;
+
         /**
          * Evaluate the fitness of an individual
          * 
@@ -21,9 +25,14 @@ namespace ga::fitness
          * 
          * @return Fitness value
          */
-        static double evaluate(model::Performance performance)
+        static double evaluate(const model::Performance performance)
         {
-            return get().evaluateImpl(performance);
+            return get()._evaluateImpl(performance);
+        }
+
+        static void interactiveDCT(const model::Performance &performance)
+        {
+            return get()._interactiveDctImpl(performance);
         }
 
     private:
@@ -35,9 +44,18 @@ namespace ga::fitness
             return s_Instance;
         }
 
-        double evaluateImpl(model::Performance performance);
+        double _evaluateImpl(const model::Performance &performance);
 
-        std::array<double, 5> m_Weights;
+        void _interactiveDctImpl(const model::Performance &performance);
+
+        darr5_t _getMetrics(model::Performance performance);
+
+        darr5_t m_Weights;
+        darr5_t m_prevMetrics;
+
+        const double m_deltaN;
+
+        bool m_started, m_terminated;
     };
 } // namespace ga::fitness
 #endif

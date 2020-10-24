@@ -1,6 +1,7 @@
 #include "genetic_algorithm/population.h"
 #include "genetic_algorithm/operators.h"
 #include "genetic_algorithm/fitness.h"
+#include "utils/config_handler.hpp"
 
 static bool sortByFitness(const ga::Organism &a, const ga::Organism &b)
 {
@@ -72,6 +73,11 @@ namespace ga
     std::string Population::getBestWeights() const
     {
         return static_cast<std::string>(m_organisms[0].getWeights());
+    }
+
+    void Population::runIDT() const
+    {
+        ga::fitness::ObjFunction::interactiveDCT(m_organisms[0].getPerformance());
     }
 
     void Population::refresh(const size_t &gen_count)

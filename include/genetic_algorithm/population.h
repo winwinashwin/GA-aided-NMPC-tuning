@@ -56,6 +56,8 @@ namespace ga
          */
         std::string getBestWeights() const;
 
+        void runIDT() const;
+
     private:
         /**
          * Update the fitness values of the population

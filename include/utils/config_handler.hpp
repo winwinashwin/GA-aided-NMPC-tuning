@@ -27,6 +27,7 @@ namespace config
         struct General
         {
             size_t generations, population_size, mating_pool_size, iterations_per_genome;
+            bool interactive_decision_tree;
         } general;
 
         struct Operators
@@ -201,6 +202,7 @@ namespace config
                 m_genConfig.general.population_size = m_root["Genetic-Algorithm"]["General"]["population_size"].as<size_t>();
                 m_genConfig.general.mating_pool_size = m_root["Genetic-Algorithm"]["General"]["mating_pool_size"].as<size_t>();
                 m_genConfig.general.iterations_per_genome = m_root["Genetic-Algorithm"]["General"]["iterations_per_genome"].as<size_t>();
+                m_genConfig.general.interactive_decision_tree = m_root["Genetic-Algorithm"]["General"]["interactive_decision_tree"].as<bool>();
 
                 m_genConfig.operators.mutation_probability = m_root["Genetic-Algorithm"]["Operators"]["mutation_probability"].as<double>();
                 m_genConfig.operators.crossover_bias = m_root["Genetic-Algorithm"]["Operators"]["crossover_bias"].as<double>();
