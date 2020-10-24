@@ -1,0 +1,38 @@
+Genetic-Algorithm:
+  General:
+    generations: 100
+    population_size: 20
+    mating_pool_size: 5
+    iterations_per_genome: 300 # Number of control loops run for a genome
+
+  Operators:
+    mutation_probability: 0.01
+    crossover_bias: 0.5 # Denotes how biased is the genome of the progeny to the first parent, 0.5 indicates no bias, both parents are treated equally
+
+MPC-Controller:
+  General:
+    timesteps: 12
+    sample_time: 0.1
+
+  # Model will try to stay close to these values
+  Desired:
+    velocity: 0.5
+    cross_track_error: 0.0
+    orientation_error: 0.0
+
+  # Constraints
+  Max-Bounds:
+    omega: 2.0
+    throttle: 1.0
+
+  # Specify the input space for weights
+  #
+  # For eg, The algorithm will optimise for w_cte in the domain [0.1, 100]
+  Weight-Bounds:
+    w_cte: [0.1, 100]
+    w_etheta: [0.1, 100]
+    w_vel: [0.1, 100]
+    w_omega: [0.01, 100]
+    w_acc: [0.01, 100]
+    w_omega_d: [0.01, 100]
+    w_acc_d: [0.01, 100]

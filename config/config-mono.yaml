@@ -1,0 +1,30 @@
+MPC-Controller:
+  General:
+    timesteps: 12
+    sample_time: 0.1
+
+  # Model will try to stay close to these values
+  Desired:
+    velocity: 0.5
+    cross_track_error: 0.0
+    orientation_error: 0.0
+
+  # Constraints
+  Max-Bounds:
+    omega: 2.0
+    throttle: 1.0
+
+  Weights:
+    w_cte: 87.859183
+    w_etheta: 99.532785
+    w_vel: 54.116644
+    w_omega: 47.430096
+    w_acc: 2.185306
+    w_omega_d: 4.611500
+    w_acc_d: 66.870729
+
+  # Termination conditions, loop ends when errors are within tolerance
+  Teardown-Tolerance:
+    velocity: 0.01
+    cross_track_error: 0.01
+    orientation_error: 0.01

@@ -1,0 +1,8 @@
+_bin 
+_build
+
+.vscode
+
+data
+
+venv
