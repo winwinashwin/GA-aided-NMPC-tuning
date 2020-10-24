@@ -1,0 +1,9 @@
+_bin 
+_build
+data
+
+.vscode
+
+venv
+
+setup.bash
