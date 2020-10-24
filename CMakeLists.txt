@@ -15,11 +15,16 @@ endif()
 message(STATUS "Generating with build type: ${CMAKE_BUILD_TYPE}")
 
 # ---------------------------------------------------------------------------------------
-# Compiler time configurations
+# Compile time configurations
 # ---------------------------------------------------------------------------------------
 if(NOT CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 17)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
+endif()
+
+if(NOT PROJECT_BM)
+    # Define `NMODE_BM` macro if not in bm mode. Else all console output will be suppressed.
+    add_compile_options(-D NMODE_BM)
 endif()
 
 # ---------------------------------------------------------------------------------------
@@ -65,14 +70,6 @@ set(LIB_SOURCES
     src/genetic_algorithm/fitness.cpp
     src/genetic_algorithm/population.cpp
 )
-
-# ---------------------------------------------------------------------------------------
-# Benchmarking options
-# ---------------------------------------------------------------------------------------
-if(NOT PROJECT_BM)
-    # Define `NMODE_BM` macro if not in bm mode. Else all console output will be suppressed.
-    add_compile_options(-D NMODE_BM)
-endif()
 
 # Update include path
 include_directories("include")
