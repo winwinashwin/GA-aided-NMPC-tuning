@@ -1,9 +1,10 @@
 Genetic-Algorithm:
   General:
-    generations: 30
+    generations: 10
     population_size: 20
     mating_pool_size: 5
     iterations_per_genome: 300 # Number of control loops run for a genome
+    interactive_decision_tree: false
 
   Operators:
     mutation_probability: 0.01
