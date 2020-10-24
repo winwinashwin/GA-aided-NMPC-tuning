@@ -1,8 +1,7 @@
 _bin 
 _build
+data
 
 .vscode
-
-data
 
 venv
