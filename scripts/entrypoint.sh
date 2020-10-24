@@ -1,35 +1,39 @@
-cmake -H. -B_build/Release -DCMAKE_BUILD_TYPE=Release && cmake --build _build/Release -- -j8
-echo -e "\n\033[1;33m Workspace build complete \033[0m\n"
+#!/bin/bash
 
-if ! [[ $? -eq 0 ]]; then
-    echo FAIL
-    exit 1
-fi
+BUILD_CONFIGURATION="Release"
+DATA_VIS_SCRIPT="scripts/plot.py"
+DATA_RAW_DIR="data"
+
+function verifyOK () {
+    if ! [[ $? -eq 0 ]]; then
+        echo FAIL
+        exit 1
+    fi
+}
+
+function consoleLog () {
+    echo -e "\n\033[1;33m $1 \033[0m\n"
+}
+
+cmake -H. -B_build/${BUILD_CONFIGURATION} -DCMAKE_BUILD_TYPE=${BUILD_CONFIGURATION} && \
+cmake --build _build/${BUILD_CONFIGURATION} -- -j8
+verifyOK
+consoleLog "Workspace build complete"
 
 export PATH=/workspace/_bin:${PATH}
 
-if ! [[ -d /workspace/data ]]; then
-    mkdir -p /workspace/data
-fi
-
 "$@"
 
-if ! [[ $? -eq 0 ]]; then
-    echo FAIL
-    exit 1
-fi
+verifyOK
 
-echo -e "\n\033[1;33m Working on visualisation. This may take some time ... \033[0m\n"
-python3.6 scripts/plot.py
+consoleLog "Working on visualisation. This may take some time ..."
+python3.6 ${DATA_VIS_SCRIPT}
 
 filename=data_$(date +%Y-%m-%d--%H%M%S).tar.gz
 tar czf ${filename} data
 rm -rf data
-echo -e "\n\033[1;33m Data saved to ${filename} \033[0m\n"
+consoleLog "Data saved to ${filename}"
 
-if ! [[ $? -eq 0 ]]; then
-    echo FAIL
-    exit 1
-fi
+verifyOK
 
 exit 0
