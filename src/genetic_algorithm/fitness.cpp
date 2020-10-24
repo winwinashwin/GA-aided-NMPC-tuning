@@ -15,7 +15,11 @@ static void normalize(std::vector<double> &array)
 
 namespace ga::fitness
 {
-    double evaluate(model::Performance performance)
+    ObjFunction::ObjFunction() : m_Weights{{0.2, 0.2, 0.2, 0.2, 0.2}}
+    {
+    }
+
+    double ObjFunction::evaluateImpl(model::Performance performance)
     {
         double fitness = 0.0;
         const size_t &iterations = performance.cteData.size();
@@ -27,16 +31,10 @@ namespace ga::fitness
         normalize(performance.translationalEL);
         normalize(performance.rotationalEL);
 
-        // We take Integral Time Absolute Error(ITAE) for the error values and 
+        // We take Integral Time Absolute Error(ITAE) for the error values and
         // Integral Absolute Error(IAE) for the energy losses(EL)
         double ITAE_cte = 0.0, ITAE_etheta = 0.0, ITAE_vel = 0.0;
         double IAE_trans = 0.0, IAE_rot = 0.0;
-
-        const double w1 = 4.0;
-        const double w2 = 3.0;
-        const double w3 = 2.0;
-        const double w4 = 2.0;
-        const double w5 = 2.0;
 
         for (size_t i = 0; i < iterations; i++)
         {
@@ -48,15 +46,23 @@ namespace ga::fitness
             IAE_rot += abs(performance.rotationalEL[i]);
         }
 
-        const double &weightedAvg = (w1 * ITAE_cte + w2 * ITAE_etheta + w3 * ITAE_vel + w4 * IAE_trans + w5 * IAE_rot) / (w1 + w2 + w3 + w4 + w5);
+        const double metricSum = m_Weights[0] * ITAE_cte +
+                                 m_Weights[1] * ITAE_etheta +
+                                 m_Weights[2] * ITAE_vel +
+                                 m_Weights[3] * IAE_trans +
+                                 m_Weights[4] * IAE_rot;
 
         // We are trying to minimise the weighted average, hence goes in denominator
-        fitness += 10000 / weightedAvg;
+        double weightSum = 0;
+        weightSum = std::accumulate(m_Weights.begin(), m_Weights.end(), weightSum);
+
+        fitness += 10000 * weightSum / metricSum;
 
         if (fitness > 1000)
         {
             DEBUG_LOG("Abnormal fitness value");
         }
+
         return fitness;
     }
 } // namespace ga::fitness

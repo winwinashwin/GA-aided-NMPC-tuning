@@ -111,7 +111,7 @@ namespace ga
                 DEBUG_LOG("Control loop fail!");
             }
 
-            const double &fitness = ga::fitness::evaluate(m_organisms[i].getPerformance());
+            const double &fitness = ga::fitness::ObjFunction::evaluate(m_organisms[i].getPerformance());
 
             m_organisms[i].setFitness(fitness);
 
