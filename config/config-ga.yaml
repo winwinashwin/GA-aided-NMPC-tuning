@@ -1,6 +1,6 @@
 Genetic-Algorithm:
   General:
-    generations: 100
+    generations: 30
     population_size: 20
     mating_pool_size: 5
     iterations_per_genome: 300 # Number of control loops run for a genome
