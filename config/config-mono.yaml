@@ -5,7 +5,7 @@ MPC-Controller:
 
   Initial-State:
     x: -8.0
-    y: 1.5
+    y: 0.7
     theta: -0.6
     linear-velocity: 0.0
     angular-velocity: 0.0
@@ -23,13 +23,13 @@ MPC-Controller:
     throttle: 1.0
 
   Weights:
-    w_cte: 87.859183
-    w_etheta: 99.532785
-    w_vel: 54.116644
-    w_omega: 47.430096
-    w_acc: 2.185306
-    w_omega_d: 4.611500
-    w_acc_d: 66.870729
+    w_cte: 99.96
+    w_etheta: 0.103
+    w_vel: 19.448
+    w_omega: 0.01
+    w_acc: 0.132
+    w_omega_d: 22.175
+    w_acc_d: 0.107
 
   # Termination conditions, loop ends when errors are within tolerance
   Teardown-Tolerance:
