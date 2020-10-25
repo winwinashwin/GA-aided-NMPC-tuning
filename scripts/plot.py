@@ -7,8 +7,6 @@
 __author__ = "Ashwin A Nayar"
 __email__ = "ashwin5059198@gmail.com"
 
-__date__ = "Thu Sep 24 20:14:43 2020"
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -25,22 +23,22 @@ class Visualize:
         self.fig = plt.figure("MPC Performance", figsize=(22, 12))
         self.data = data
 
-    def visualize(self):
+    def visualize(self) -> None:
         self.vis_trajectory(self.fig.add_subplot(311))
         self.vis_error(self.fig.add_subplot(312))
         self.vis_weights(self.fig.add_subplot(325))
         self.vis_equation(self.fig.add_subplot(326))
 
-    def save(self, path):
+    def save(self, path: str) -> None:
         plt.savefig(path)
 
-    def show(self):
+    def show(self) -> None:
         plt.subplots_adjust(top=0.95, bottom=0.05, left=0.05,
                             right=0.95, hspace=0.28, wspace=0.055)
         plt.get_current_fig_manager().window.showMaximized()
         plt.show()
 
-    def vis_trajectory(self, ax):
+    def vis_trajectory(self, ax) -> None:
         traj_x = self.data["x"]
         traj_y = self.data["y"]
         costs = self.data["costs"]
@@ -63,7 +61,7 @@ class Visualize:
         ax.legend(prop={'size': 16})
         ax.set_title("Trajectory Information", fontsize=18)
 
-    def vis_error(self, ax):
+    def vis_error(self, ax) -> None:
         cte = self.data["cte"]
         etheta = self.data["etheta"]
         traj_x = self.data["x"]
@@ -84,7 +82,7 @@ class Visualize:
         ax.legend(prop={'size': 16})
         ax.set_title("Error variation", fontsize=18)
 
-    def vis_weights(self, ax):
+    def vis_weights(self, ax) -> None:
         labels = [r'$W_v$', r'$W_d$', r'$W_{\eta}$', r'$W_{\omega}$',
                   r'$W_a$', r'$W_{\dot{\omega}}$', r'$W_{\dot{a}}$']
         weights = [
@@ -108,7 +106,7 @@ class Visualize:
         ax.tick_params(axis='both', which='major', labelsize=16)
         ax.set_title("Weight distribution", fontsize=18)
 
-    def vis_equation(self, ax):
+    def vis_equation(self, ax) -> None:
         equation = r"$J(s) = \sum\limits_{t=0}^N\begin{bmatrix} W_{v} & 0 & 0 \\ 0 & W_{d} & 0 \\ 0 & 0 & W_{\eta} \end{bmatrix}$"
         equation += r"$\begin{bmatrix} \mid\mid{v_{t} - v_{t}^{ref}}\mid\mid^{2} \\ \mid\mid d_{t} \mid\mid^{2} \\ \mid\mid \eta_{t} \mid\mid^{2} \end{bmatrix}$"
         equation += r"$+ \sum\limits_{t=1}^{N-1}\begin{bmatrix} W_{\omega} & 0 \\ 0 & W_{a} \end{bmatrix}$"

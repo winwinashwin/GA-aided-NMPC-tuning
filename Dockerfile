@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
     curl \
     wget \
+    zip \
     unzip \
     git \
     gfortran \
@@ -40,4 +41,4 @@ COPY scripts/entrypoint.sh /mpc-entrypoint.sh
 RUN mkdir /workspace
 WORKDIR /workspace
 
-ENTRYPOINT [ "bash", "/mpc-entrypoint.sh" ]
+ENTRYPOINT [ "/mpc-entrypoint.sh" ]
