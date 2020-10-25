@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.18)
 project(ga_nmpc_tuning VERSION 0.0)
 set(PROJECT_ALIAS "gnt")
 
-option(PROJECT_TESTS "Build the tests"           ON)
+option(PROJECT_TESTS "Build the tests"          OFF)
 option(PROJECT_BM    "Build in benchmark mode"  OFF)
 
 # ---------------------------------------------------------------------------------------
