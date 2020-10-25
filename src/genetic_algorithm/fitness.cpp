@@ -39,7 +39,7 @@ namespace ga::fitness
         // Integral Absolute Error(IAE) for the energy losses(EL)
         for (size_t i = 0; i < iterations; i++)
         {
-            metrics[0] += pow(performance.cteData[i], 2);
+            metrics[0] += (i + 1) * abs(performance.cteData[i]);
             metrics[1] += (i + 1) * abs(performance.ethetaData[i]);
             metrics[2] += (i + 1) * abs(performance.velErrData[i]);
 
