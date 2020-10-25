@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <bitset>
+#include <memory>
 #include <tuple>
 #include <array>
 #include <random>

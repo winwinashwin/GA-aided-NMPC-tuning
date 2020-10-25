@@ -1,19 +1,19 @@
 #include "genetic_algorithm/population.h"
 #include "utils/config_handler.hpp"
 
-static const auto gaConfig = config::ConfigHandler<config::GA>::getGAConfig();
-
 int main(int argc, char **argv)
 {
     DEBUG_LOG("Binary built in debug mode. If not intended, abort.");
 
     srand(time(0));
 
+    const auto gaConfig = config::ConfigHandler<config::GA>::getGAConfig();
+
     const size_t &popSize = gaConfig.general.population_size;
     const size_t &matingPoolSize = gaConfig.general.mating_pool_size;
     const size_t &numberOfGenerations = gaConfig.general.generations;
 
-    ga::Population *newPopulation = new ga::Population(popSize, matingPoolSize);
+    std::unique_ptr<ga::Population> newPopulation(new ga::Population(popSize, matingPoolSize));
 
     newPopulation->randDistInit();
 
@@ -24,8 +24,7 @@ int main(int argc, char **argv)
         // All magic happens here !!
         newPopulation->mainLoop();
 
-        CONSOLE_LOG("Best fitness: " << newPopulation->getBestFitness() << "\n");
-        CONSOLE_LOG(std::endl);
+        CONSOLE_LOG("Best fitness: " << newPopulation->getBestFitness() << "\n\n");
 
         if (gaConfig.general.interactive_decision_tree)
             newPopulation->runIDT();
@@ -37,6 +36,4 @@ int main(int argc, char **argv)
 
     CONSOLE_LOG("Optimum weights found : \n"
                 << newPopulation->getBestWeights() << std::endl);
-
-    delete newPopulation;
 }
