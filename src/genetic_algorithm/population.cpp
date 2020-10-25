@@ -10,6 +10,10 @@ static bool sortByFitness(const ga::Organism &a, const ga::Organism &b)
 
 namespace ga
 {
+
+    static const auto gaConfig = config::ConfigHandler<config::GA>::getGAConfig();
+    static const auto mpcConfig = config::ConfigHandler<config::GA>::getMpcConfig();
+
     Population::Population(const size_t &size, const size_t &matingPoolSize)
         : m_popSize(size),
           m_matingPoolSize(matingPoolSize)
@@ -25,20 +29,19 @@ namespace ga
 
     void Population::randDistInit()
     {
-        const auto &config = config::ConfigHandler<config::GA>::getMpcConfig();
 
         // Generator for the distribution
         std::random_device rand_dev;
         std::mt19937 generator(rand_dev());
 
         // Distributions for different weights
-        std::uniform_real_distribution<double> dist_vel(config.weight_bounds.w_vel.first, config.weight_bounds.w_vel.second);
-        std::uniform_real_distribution<double> dist_cte(config.weight_bounds.w_cte.first, config.weight_bounds.w_cte.second);
-        std::uniform_real_distribution<double> dist_etheta(config.weight_bounds.w_etheta.first, config.weight_bounds.w_etheta.second);
-        std::uniform_real_distribution<double> dist_omega(config.weight_bounds.w_omega.first, config.weight_bounds.w_omega.second);
-        std::uniform_real_distribution<double> dist_acc(config.weight_bounds.w_acc.first, config.weight_bounds.w_acc.second);
-        std::uniform_real_distribution<double> dist_omega_d(config.weight_bounds.w_omega_d.first, config.weight_bounds.w_omega_d.second);
-        std::uniform_real_distribution<double> dist_acc_d(config.weight_bounds.w_acc_d.first, config.weight_bounds.w_acc_d.second);
+        std::uniform_real_distribution<double> dist_vel(mpcConfig.weight_bounds.w_vel.first, mpcConfig.weight_bounds.w_vel.second);
+        std::uniform_real_distribution<double> dist_cte(mpcConfig.weight_bounds.w_cte.first, mpcConfig.weight_bounds.w_cte.second);
+        std::uniform_real_distribution<double> dist_etheta(mpcConfig.weight_bounds.w_etheta.first, mpcConfig.weight_bounds.w_etheta.second);
+        std::uniform_real_distribution<double> dist_omega(mpcConfig.weight_bounds.w_omega.first, mpcConfig.weight_bounds.w_omega.second);
+        std::uniform_real_distribution<double> dist_acc(mpcConfig.weight_bounds.w_acc.first, mpcConfig.weight_bounds.w_acc.second);
+        std::uniform_real_distribution<double> dist_omega_d(mpcConfig.weight_bounds.w_omega_d.first, mpcConfig.weight_bounds.w_omega_d.second);
+        std::uniform_real_distribution<double> dist_acc_d(mpcConfig.weight_bounds.w_acc_d.first, mpcConfig.weight_bounds.w_acc_d.second);
 
         for (size_t i = 0; i < m_popSize; i++)
         {
@@ -94,18 +97,16 @@ namespace ga
     {
         mpc::Params params;
 
-        auto config = config::ConfigHandler<config::GA>::getMpcConfig();
-
-        params.forward.timesteps = config.general.timesteps;
-        params.forward.dt = config.general.sample_time;
-        params.desired.vel = config.desired.velocity;
-        params.desired.cte = config.desired.cross_track_error;
-        params.desired.etheta = config.desired.orientation_error;
-        params.limits.omega = {-config.max_bounds.omega, config.max_bounds.omega};
-        params.limits.throttle = {-config.max_bounds.throttle, config.max_bounds.throttle};
+        params.forward.timesteps = mpcConfig.general.timesteps;
+        params.forward.dt = mpcConfig.general.sample_time;
+        params.desired.vel = mpcConfig.desired.velocity;
+        params.desired.cte = mpcConfig.desired.cross_track_error;
+        params.desired.etheta = mpcConfig.desired.orientation_error;
+        params.limits.omega = {-mpcConfig.max_bounds.omega, mpcConfig.max_bounds.omega};
+        params.limits.throttle = {-mpcConfig.max_bounds.throttle, mpcConfig.max_bounds.throttle};
 
         model::TerminateOn<config::GA> condn;
-        condn.iterations = config::ConfigHandler<config::GA>::getGAConfig().general.iterations_per_genome;
+        condn.iterations = gaConfig.general.iterations_per_genome;
 
         for (size_t i = 0; i < m_popSize; i++)
         {

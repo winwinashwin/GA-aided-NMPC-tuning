@@ -1,6 +1,6 @@
 Genetic-Algorithm:
   General:
-    generations: 100
+    generations: 10
     population_size: 20
     mating_pool_size: 5
     iterations_per_genome: 300 # Number of control loops run for a genome
@@ -14,6 +14,14 @@ MPC-Controller:
   General:
     timesteps: 12
     sample_time: 0.1
+
+  Initial-State:
+    x: -8.0
+    y: 0.5
+    theta: -0.6
+    linear-velocity: 0.0
+    angular-velocity: 0.0
+    throttle: 0.0
 
   # Model will try to stay close to these values
   Desired:

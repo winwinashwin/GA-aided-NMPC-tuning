@@ -3,6 +3,14 @@ MPC-Controller:
     timesteps: 12
     sample_time: 0.1
 
+  Initial-State:
+    x: -8.0
+    y: 1.5
+    theta: -0.6
+    linear-velocity: 0.0
+    angular-velocity: 0.0
+    throttle: 0.0
+
   # Model will try to stay close to these values
   Desired:
     velocity: 0.5

@@ -48,6 +48,11 @@ namespace config
 
         } general;
 
+        struct __Initial
+        {
+            double x, y, theta, linear_velocity, angular_velocity, throttle;
+        } initial_state;
+
         struct __Desired
         {
             double velocity, cross_track_error, orientation_error;
@@ -75,6 +80,11 @@ namespace config
             double sample_time;
 
         } general;
+
+        struct __Initial
+        {
+            double x, y, theta, linear_velocity, angular_velocity, throttle;
+        } initial_state;
 
         struct __Desired
         {
@@ -210,6 +220,13 @@ namespace config
                 m_mpcConfigGA.general.timesteps = m_root["MPC-Controller"]["General"]["timesteps"].as<size_t>();
                 m_mpcConfigGA.general.sample_time = m_root["MPC-Controller"]["General"]["sample_time"].as<double>();
 
+                m_mpcConfigGA.initial_state.x = m_root["MPC-Controller"]["Initial-State"]["x"].as<double>();
+                m_mpcConfigGA.initial_state.y = m_root["MPC-Controller"]["Initial-State"]["y"].as<double>();
+                m_mpcConfigGA.initial_state.theta = m_root["MPC-Controller"]["Initial-State"]["theta"].as<double>();
+                m_mpcConfigGA.initial_state.linear_velocity = m_root["MPC-Controller"]["Initial-State"]["linear-velocity"].as<double>();
+                m_mpcConfigGA.initial_state.angular_velocity = m_root["MPC-Controller"]["Initial-State"]["angular-velocity"].as<double>();
+                m_mpcConfigGA.initial_state.throttle = m_root["MPC-Controller"]["Initial-State"]["throttle"].as<double>();
+
                 m_mpcConfigGA.desired.velocity = m_root["MPC-Controller"]["Desired"]["velocity"].as<double>();
                 m_mpcConfigGA.desired.cross_track_error = m_root["MPC-Controller"]["Desired"]["cross_track_error"].as<double>();
                 m_mpcConfigGA.desired.orientation_error = m_root["MPC-Controller"]["Desired"]["orientation_error"].as<double>();
@@ -232,6 +249,13 @@ namespace config
             {
                 m_mpcConfigMono.general.timesteps = m_root["MPC-Controller"]["General"]["timesteps"].as<size_t>();
                 m_mpcConfigMono.general.sample_time = m_root["MPC-Controller"]["General"]["sample_time"].as<double>();
+
+                m_mpcConfigMono.initial_state.x = m_root["MPC-Controller"]["Initial-State"]["x"].as<double>();
+                m_mpcConfigMono.initial_state.y = m_root["MPC-Controller"]["Initial-State"]["y"].as<double>();
+                m_mpcConfigMono.initial_state.theta = m_root["MPC-Controller"]["Initial-State"]["theta"].as<double>();
+                m_mpcConfigMono.initial_state.linear_velocity = m_root["MPC-Controller"]["Initial-State"]["linear-velocity"].as<double>();
+                m_mpcConfigMono.initial_state.angular_velocity = m_root["MPC-Controller"]["Initial-State"]["angular-velocity"].as<double>();
+                m_mpcConfigMono.initial_state.throttle = m_root["MPC-Controller"]["Initial-State"]["throttle"].as<double>();
 
                 m_mpcConfigMono.desired.velocity = m_root["MPC-Controller"]["Desired"]["velocity"].as<double>();
                 m_mpcConfigMono.desired.cross_track_error = m_root["MPC-Controller"]["Desired"]["cross_track_error"].as<double>();
