@@ -2,7 +2,6 @@
 #define GA_CORE_H_
 
 #include "pcheaders.h"
-
 #include "mpc_lib/mpc.h"
 
 /**

@@ -36,8 +36,8 @@
 #define DEBUG_LOG(x)
 #endif // NDEBUG
 
-#ifndef NMODE_BM
+#ifndef NBENCHMARK
 #define CONSOLE_LOG(x)
 #else
 #define CONSOLE_LOG(x) std::cout << x
-#endif // NMODE_BM
+#endif // NBENCHMARK

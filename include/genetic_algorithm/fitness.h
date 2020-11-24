@@ -2,7 +2,6 @@
 #define GA_FITNESS_H_
 
 #include "pcheaders.h"
-
 #include "model/differential_drive.h"
 
 /**

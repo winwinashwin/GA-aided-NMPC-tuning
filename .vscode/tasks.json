@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "CMake Build - Debug",
+      "label": "CMake: Build - Debug",
       "type": "shell",
       "command": "cmake",
       "args": ["--build", "build/Debug", "--", "-j8"],
@@ -23,6 +23,61 @@
       },
       "group": "build",
       "problemMatcher": "$gcc"
+    },
+    {
+      "label": "CMake: Build - Release",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "build/Release", "--", "-j8"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "dependsOn": ["preBuild - Release"],
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "preBuild - Release",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["-H.", "-Bbuild/Release", "-DCMAKE_BUILD_TYPE=Release"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "CMake: Clean",
+      "type": "shell",
+      "command": "rm",
+      "args": ["-r", "bin", "build"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build"
+    },
+    {
+      "label": "CMake: Test - Debug",
+      "type": "shell",
+      "command": "make",
+      "args": ["test"],
+      "options": {
+        "cwd": "${workspaceFolder}/build/Debug"
+      },
+      "group": "build",
+      "dependsOn": ["CMake: Build - Debug"]
+    },
+    {
+      "label": "CMake: Test - Release",
+      "type": "shell",
+      "command": "make",
+      "args": ["test"],
+      "options": {
+        "cwd": "${workspaceFolder}/build/Release"
+      },
+      "group": "build",
+      "dependsOn": ["CMake: Build - Release"]
     }
   ]
 }

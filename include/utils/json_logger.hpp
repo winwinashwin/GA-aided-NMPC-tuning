@@ -3,7 +3,6 @@
 
 #include "pcheaders.h"
 
-
 /**
  * Log the performance data into JSON files for visualising
  */

@@ -2,7 +2,6 @@
 #define GA_POPULATION_H_
 
 #include "pcheaders.h"
-
 #include "genetic_algorithm/organism.h"
 #include "utils/progress_bar.hpp"
 #include "utils/config_handler.hpp"

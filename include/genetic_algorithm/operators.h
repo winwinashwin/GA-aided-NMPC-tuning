@@ -2,7 +2,6 @@
 #define GA_OPERATORS_H_
 
 #include "pcheaders.h"
-
 #include "genetic_algorithm/core.h"
 
 /**

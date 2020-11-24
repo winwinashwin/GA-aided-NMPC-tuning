@@ -8,7 +8,8 @@ option(PROJECT_TESTS "Build the tests" ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_compile_options(-std=c++17 -Wall -Wshadow)
+add_compile_options(-Wall -Wshadow)
+add_compile_definitions(NBENCHMARK)
 
 # ---------------------------------------------------------------------------------------
 # Set default build to release
@@ -38,7 +39,6 @@ find_package(Eigen3 3.3  REQUIRED)
 pkg_check_modules(libCPPAD  REQUIRED  cppad)
 pkg_check_modules(libIPOPT  REQUIRED  ipopt)
 
-
 set(LIBRARIES
     yaml-cpp
     jsoncpp
@@ -62,7 +62,6 @@ set(SOURCE_FILES
     src/genetic_algorithm/population.cpp
 )
 
-# Update include path
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
 )
@@ -81,7 +80,6 @@ target_link_libraries(hone_weights ${PROJECT_ALIAS})
 target_precompile_headers(hone_weights REUSE_FROM ${PROJECT_ALIAS})
 
 if(PROJECT_TESTS)
-    enable_testing()
     add_subdirectory(lib/googletest)
     add_subdirectory(tests)
 endif()

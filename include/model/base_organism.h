@@ -2,7 +2,6 @@
 #define MODEL_BASE_ORG_H_
 
 #include "pcheaders.h"
-
 #include "model/differential_drive.h"
 #include "mpc_lib/mpc.h"
 #include "utils/config_handler.hpp"

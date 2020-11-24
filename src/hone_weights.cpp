@@ -4,7 +4,6 @@
 int main(int argc, char **argv)
 {
     DEBUG_LOG("Binary built in debug mode. If not intended, abort.");
-
     srand(time(0));
 
     const auto gaConfig = config::ConfigHandler<config::GA>::getGAConfig();

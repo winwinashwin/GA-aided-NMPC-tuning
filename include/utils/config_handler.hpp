@@ -3,6 +3,16 @@
 
 #include "pcheaders.h"
 
+static const char *BANNER = ""
+                            "**************************************************************\n"
+                            "                     GA AIDED NMPC TUNING                     \n"
+                            "                                                              \n"
+                            " Robust gain tuning of Nonlinear MPC using Genetic Algorithms \n"
+                            "                                                              \n"
+                            "                                    @author: ashwin5059198    \n"
+                            "                                                              \n"
+                            "**************************************************************\n";
+
 /**
  * Runtime configurations
  */
@@ -176,6 +186,8 @@ namespace config
         /// Constructor
         ConfigHandler()
         {
+            CONSOLE_LOG(BANNER << std::endl);
+
             switch (ctype)
             {
             case GA:
@@ -193,6 +205,8 @@ namespace config
             m_root = YAML::LoadFile(m_filename);
 
             _updateInternalData();
+
+            _printToStdout();
         }
 
         /**
@@ -279,6 +293,88 @@ namespace config
             }
             default:
                 break;
+            }
+        }
+
+        /**
+         * Print loaded parameters to STDOUT
+         */
+        void _printToStdout() const
+        {
+            switch (ctype)
+            {
+            case GA:
+            {
+                CONSOLE_LOG("* PARAMETERS  - Genetic Algorithm\n\n");
+                CONSOLE_LOG("? Generations                  : " << m_genConfig.general.generations << std::endl);
+                CONSOLE_LOG("? Population size              : " << m_genConfig.general.population_size << std::endl);
+                CONSOLE_LOG("? Mating pool size             : " << m_genConfig.general.mating_pool_size << std::endl);
+                CONSOLE_LOG("? Iterations per genome        : " << m_genConfig.general.iterations_per_genome << std::endl);
+                CONSOLE_LOG("? Interactive Decision Tree    : " << m_genConfig.general.interactive_decision_tree << std::endl);
+                CONSOLE_LOG("? Mutation probability         : " << m_genConfig.operators.mutation_probability << std::endl);
+                CONSOLE_LOG("? Crossover bias               : " << m_genConfig.operators.crossover_bias << std::endl);
+                CONSOLE_LOG(std::endl);
+                CONSOLE_LOG("* PARAMETERS  - Model Predictive Control\n\n");
+                CONSOLE_LOG("? Timesteps                    : " << m_mpcConfigGA.general.timesteps << std::endl);
+                CONSOLE_LOG("? Sample time                  : " << m_mpcConfigGA.general.sample_time << std::endl);
+                CONSOLE_LOG("? Initial state - x            : " << m_mpcConfigGA.initial_state.x << std::endl);
+                CONSOLE_LOG("? Initial state - y            : " << m_mpcConfigGA.initial_state.y << std::endl);
+                CONSOLE_LOG("? Initial state - theta        : " << m_mpcConfigGA.initial_state.theta << std::endl);
+                CONSOLE_LOG("? Initial speed - linear       : " << m_mpcConfigGA.initial_state.linear_velocity << std::endl);
+                CONSOLE_LOG("? Initial speed - angular      : " << m_mpcConfigGA.initial_state.angular_velocity << std::endl);
+                CONSOLE_LOG("? Initial throttle             : " << m_mpcConfigGA.initial_state.throttle << std::endl);
+                CONSOLE_LOG("? Desired velocity             : " << m_mpcConfigGA.desired.velocity << std::endl);
+                CONSOLE_LOG("? Desired error - cross track  : " << m_mpcConfigGA.desired.cross_track_error << std::endl);
+                CONSOLE_LOG("? Desired error - orientation  : " << m_mpcConfigGA.desired.orientation_error << std::endl);
+                CONSOLE_LOG("? Constraints   - omega        : "
+                            << "[ " << -m_mpcConfigGA.max_bounds.omega << ", " << m_mpcConfigGA.max_bounds.omega << " ]" << std::endl);
+                CONSOLE_LOG("? Constraints   - throttle     : "
+                            << "[ " << -m_mpcConfigGA.max_bounds.throttle << ", " << m_mpcConfigGA.max_bounds.throttle << " ]" << std::endl);
+                CONSOLE_LOG("? Weight bounds - w_cte        : "
+                            << "[ " << m_mpcConfigGA.weight_bounds.w_cte.first << ", " << m_mpcConfigGA.weight_bounds.w_cte.second << " ]" << std::endl);
+                CONSOLE_LOG("? Weight bounds - w_etheta     : "
+                            << "[ " << m_mpcConfigGA.weight_bounds.w_etheta.first << ", " << m_mpcConfigGA.weight_bounds.w_etheta.second << " ]" << std::endl);
+                CONSOLE_LOG("? Weight bounds - w_vel        : "
+                            << "[ " << m_mpcConfigGA.weight_bounds.w_vel.first << ", " << m_mpcConfigGA.weight_bounds.w_vel.second << " ]" << std::endl);
+                CONSOLE_LOG("? Weight bounds - w_omega      : "
+                            << "[ " << m_mpcConfigGA.weight_bounds.w_omega.first << ", " << m_mpcConfigGA.weight_bounds.w_omega.second << " ]" << std::endl);
+                CONSOLE_LOG("? Weight bounds - w_acc        : "
+                            << "[ " << m_mpcConfigGA.weight_bounds.w_acc.first << ", " << m_mpcConfigGA.weight_bounds.w_acc.second << " ]" << std::endl);
+                CONSOLE_LOG("? Weight bounds - w_omega_d    : "
+                            << "[ " << m_mpcConfigGA.weight_bounds.w_omega_d.first << ", " << m_mpcConfigGA.weight_bounds.w_omega_d.second << " ]" << std::endl);
+                CONSOLE_LOG("? Weight bounds - w_acc_d      : "
+                            << "[ " << m_mpcConfigGA.weight_bounds.w_acc_d.first << ", " << m_mpcConfigGA.weight_bounds.w_acc_d.second << " ]" << std::endl);
+                CONSOLE_LOG(std::endl);
+                break;
+            }
+            case MONO:
+            {
+                CONSOLE_LOG("* PARAMETERS  - Model Predictive Control\n\n");
+                CONSOLE_LOG("? Timesteps                    : " << m_mpcConfigMono.general.timesteps << std::endl);
+                CONSOLE_LOG("? Sample time                  : " << m_mpcConfigMono.general.sample_time << std::endl);
+                CONSOLE_LOG("? Initial state - x            : " << m_mpcConfigMono.initial_state.x << std::endl);
+                CONSOLE_LOG("? Initial state - y            : " << m_mpcConfigMono.initial_state.y << std::endl);
+                CONSOLE_LOG("? Initial state - theta        : " << m_mpcConfigMono.initial_state.theta << std::endl);
+                CONSOLE_LOG("? Initial speed - linear       : " << m_mpcConfigMono.initial_state.linear_velocity << std::endl);
+                CONSOLE_LOG("? Initial speed - angular      : " << m_mpcConfigMono.initial_state.angular_velocity << std::endl);
+                CONSOLE_LOG("? Initial throttle             : " << m_mpcConfigMono.initial_state.throttle << std::endl);
+                CONSOLE_LOG("? Desired velocity             : " << m_mpcConfigMono.desired.velocity << std::endl);
+                CONSOLE_LOG("? Desired error - cross track  : " << m_mpcConfigMono.desired.cross_track_error << std::endl);
+                CONSOLE_LOG("? Desired error - orientation  : " << m_mpcConfigMono.desired.orientation_error << std::endl);
+                CONSOLE_LOG("? Constraints   - omega        : "
+                            << "[ " << -m_mpcConfigMono.max_bounds.omega << ", " << m_mpcConfigMono.max_bounds.omega << " ]" << std::endl);
+                CONSOLE_LOG("? Constraints   - throttle     : "
+                            << "[ " << -m_mpcConfigMono.max_bounds.throttle << ", " << m_mpcConfigMono.max_bounds.throttle << " ]" << std::endl);
+                CONSOLE_LOG("? Weight        - w_cte        : " << m_mpcConfigMono.weights.w_cte << std::endl);
+                CONSOLE_LOG("? Weight        - w_etheta     : " << m_mpcConfigMono.weights.w_etheta << std::endl);
+                CONSOLE_LOG("? Weight        - w_vel        : " << m_mpcConfigMono.weights.w_vel << std::endl);
+                CONSOLE_LOG("? Weight        - w_omega      : " << m_mpcConfigMono.weights.w_omega << std::endl);
+                CONSOLE_LOG("? Weight        - w_acc        : " << m_mpcConfigMono.weights.w_acc << std::endl);
+                CONSOLE_LOG("? Weight        - w_omega_d    : " << m_mpcConfigMono.weights.w_omega_d << std::endl);
+                CONSOLE_LOG("? Weight        - w_acc_d      : " << m_mpcConfigMono.weights.w_acc_d << std::endl);
+                CONSOLE_LOG(std::endl);
+                break;
+            }
             }
         }
 

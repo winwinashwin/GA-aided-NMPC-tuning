@@ -5,10 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "(gdb) Launch",
+      "name": "(gdb) Launch GA-NMPC",
       "type": "cppdbg",
       "request": "launch",
-      "program": "",
+      "program": "bin/hone_weights",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -21,7 +21,8 @@
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
         }
-      ]
+      ],
+      "preLaunchTask": "CMake: Build - Debug"
     }
   ]
 }

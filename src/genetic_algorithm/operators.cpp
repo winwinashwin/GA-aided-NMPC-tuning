@@ -4,7 +4,6 @@ namespace ga::operators::mutation
 {
     ga::core::Genome bitFlip(const ga::core::Genome &genome, double mutationProbability)
     {
-        DEBUG_LOG("Mutation probability: " << mutationProbability);
         ga::core::Genome newGenome = genome;
 
         for (auto &chrom : newGenome.chromosomes)

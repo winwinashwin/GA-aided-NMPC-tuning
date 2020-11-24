@@ -1,5 +1,3 @@
-#include "pcheaders.h"
-
 #include "model/base_organism.h"
 
 namespace model
