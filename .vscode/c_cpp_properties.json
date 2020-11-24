@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "name": "GA aided NMPC tuning",
+      "intelliSenseMode": "clang-x64",
+      "includePath": ["${workspaceFolder}/include"],
+      "defines": [],
+      "compilerPath": "/usr/bin/g++-7",
+      "cppStandard": "c++17",
+      "browse": {
+        "path": ["${workspaceFolder}"],
+        "limitSymbolsToIncludedHeaders": true,
+        "databaseFilename": ""
+      }
+    }
+  ],
+  "version": 4
+}
