@@ -3,16 +3,6 @@
 
 #include "pcheaders.h"
 
-static const char *BANNER = ""
-                            "**************************************************************\n"
-                            "                     GA AIDED NMPC TUNING                     \n"
-                            "                                                              \n"
-                            " Robust gain tuning of Nonlinear MPC using Genetic Algorithms \n"
-                            "                                                              \n"
-                            "                                    @author: ashwin5059198    \n"
-                            "                                                              \n"
-                            "**************************************************************\n";
-
 /**
  * Runtime configurations
  */
@@ -186,7 +176,14 @@ namespace config
         /// Constructor
         ConfigHandler()
         {
-            CONSOLE_LOG(BANNER << std::endl);
+            CONSOLE_LOG("**************************************************************\n");
+            CONSOLE_LOG("                     GA AIDED NMPC TUNING                     \n");
+            CONSOLE_LOG("                                                              \n");
+            CONSOLE_LOG(" Robust gain tuning of Nonlinear MPC using Genetic Algorithms \n");
+            CONSOLE_LOG("                                                              \n");
+            CONSOLE_LOG("                                    @author: ashwin5059198    \n");
+            CONSOLE_LOG("                                                              \n");
+            CONSOLE_LOG("**************************************************************\n");
 
             switch (ctype)
             {

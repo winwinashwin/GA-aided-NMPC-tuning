@@ -3,13 +3,16 @@ cmake_minimum_required(VERSION 3.18)
 project(ga_nmpc_tuning VERSION 0.0)
 set(PROJECT_ALIAS "gnt")
 
-option(PROJECT_TESTS "Build the tests" ON)
+option(BUILD_TESTS        "Build the tests"          ON)
+option(BUILD_BENCHMARK    "Build benchmark binaries" ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options(-Wall -Wshadow)
-add_compile_definitions(NBENCHMARK)
+if(NOT BUILD_BENCHMARK)
+    add_compile_definitions(NBENCHMARK)
+endif()
 
 # ---------------------------------------------------------------------------------------
 # Set default build to release
@@ -79,7 +82,22 @@ add_executable(hone_weights src/hone_weights.cpp)
 target_link_libraries(hone_weights ${PROJECT_ALIAS})
 target_precompile_headers(hone_weights REUSE_FROM ${PROJECT_ALIAS})
 
-if(PROJECT_TESTS)
+# ---------------------------------------------------------------------------------------
+# Testing
+# ---------------------------------------------------------------------------------------
+if(BUILD_TESTS)
     add_subdirectory(lib/googletest)
     add_subdirectory(tests)
+endif()
+
+# ---------------------------------------------------------------------------------------
+# Benchmarking
+# ---------------------------------------------------------------------------------------
+if(BUILD_BENCHMARK)
+    if(NOT BUILD_TESTS)
+        add_subdirectory(lib/googletest)
+    endif()
+
+    add_subdirectory(lib/google-benchmark)
+    add_subdirectory(benchmark)
 endif()

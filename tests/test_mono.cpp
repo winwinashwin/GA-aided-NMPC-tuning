@@ -48,7 +48,7 @@ static size_t mpcTestLoop(void)
         std::array<double, 40> ptsx;
         std::array<double, 40> ptsy;
 
-        const model::State &state = dModel.getState();
+        const model::State state = dModel.getState();
 
         for (size_t i = 0; i < 40; i++)
         {
@@ -56,10 +56,10 @@ static size_t mpcTestLoop(void)
             ptsy[i] = 0.0;
         }
 
-        const double &px = state.x;
-        const double &py = state.y;
-        const double &theta = state.theta;
-        const double &v = state.linVel;
+        const double px = state.x;
+        const double py = state.y;
+        const double theta = state.theta;
+        const double v = state.linVel;
         double omega = state.angVel;
         double throttle = state.throttle;
 
@@ -79,15 +79,13 @@ static size_t mpcTestLoop(void)
 
         const Eigen::VectorXd &coeffs = mpc::utils::polyfit(ptsx_transform, ptsy_transform, 3);
 
-        const double &cte = mpc::utils::polyeval(coeffs, 0);
-        const double &etheta = -atan(coeffs[1]);
+        const double cte = mpc::utils::polyeval(coeffs, 0);
+        const double etheta = -atan(coeffs[1]);
 
         if (abs(cte) > 10)
-        {
             DEBUG_LOG("CTE out of bounds!! Got: " << cte);
-        }
 
-        const double &dt = params.forward.dt;
+        const double dt = params.forward.dt;
         const double current_px = 0.0 + v * dt;
         const double current_py = 0.0;
         const double current_theta = 0.0 + omega * dt;
@@ -100,7 +98,7 @@ static size_t mpcTestLoop(void)
 
         // time to solve !
         mpc::MPC _mpc(params, coeffs);
-        const std::vector<double> &mpc_solns = _mpc.solve(model_state);
+        const std::vector<double> mpc_solns = _mpc.solve(model_state);
 
         omega = mpc_solns[0];
         throttle = mpc_solns[1];
