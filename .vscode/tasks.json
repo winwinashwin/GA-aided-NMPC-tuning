@@ -55,7 +55,8 @@
       "options": {
         "cwd": "${workspaceFolder}"
       },
-      "group": "build"
+      "group": "build",
+      "problemMatcher": []
     },
     {
       "label": "CMake: Test - Debug",
@@ -66,7 +67,8 @@
         "cwd": "${workspaceFolder}/build/Debug"
       },
       "group": "build",
-      "dependsOn": ["CMake: Build - Debug"]
+      "dependsOn": ["CMake: Build - Debug"],
+      "problemMatcher": "$gcc"
     },
     {
       "label": "CMake: Test - Release",
@@ -77,7 +79,8 @@
         "cwd": "${workspaceFolder}/build/Release"
       },
       "group": "build",
-      "dependsOn": ["CMake: Build - Release"]
+      "dependsOn": ["CMake: Build - Release"],
+      "problemMatcher": "$gcc"
     }
   ]
 }
