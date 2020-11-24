@@ -45,7 +45,7 @@ namespace ga
          * 
          * @param fitness: Fitness value
          */
-        void setFitness(const double &fitness);
+        void setFitness(double fitness);
 
         /**
          * Assign weights to the orgaism
@@ -64,7 +64,7 @@ namespace ga
         /**
          * Save the organism as the best in a population
          */
-        void saveAsBest(const size_t &genCount);
+        void saveAsBest(size_t genCount);
 
     private:
         /// Genome of individual

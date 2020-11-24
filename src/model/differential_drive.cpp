@@ -18,12 +18,12 @@ namespace model
     {
     }
 
-    void DifferentialDrive::setSampleTime(const double &sampletime)
+    void DifferentialDrive::setSampleTime(double sampletime)
     {
         m_sampleTime = sampletime;
     }
 
-    void DifferentialDrive::step(const double &speed, const double &omega)
+    void DifferentialDrive::step(double speed, double omega)
     {
         m_state.x += m_state.linVel * cos(m_state.theta) * m_sampleTime;
         m_state.y += m_state.linVel * sin(m_state.theta) * m_sampleTime;

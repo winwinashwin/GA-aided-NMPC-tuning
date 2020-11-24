@@ -53,9 +53,7 @@ public:
         const bool &ok = followSetpoints(m_params, m_term);
 
         if (!ok)
-        {
             DEBUG_LOG("Control loop fail !");
-        }
     }
 
 private:
@@ -78,9 +76,7 @@ int main(int argc, char **argv)
     Organism *organism = new Organism();
 
     organism->setModelInitState(s);
-
     organism->run();
-
     organism->saveData();
 
     delete organism;

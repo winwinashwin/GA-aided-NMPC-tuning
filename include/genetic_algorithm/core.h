@@ -13,14 +13,14 @@ namespace ga::core
     struct Chromosome
     {
         // Constructor
-        Chromosome(const double &lb, const double &ub);
+        Chromosome(double lb, double ub);
 
         /**
          * Encode weight into the chromosome
          * 
          * @param weight: Weight to be encoded
          */
-        void encodeWeight(const double &weight);
+        void encodeWeight(double weight);
 
         /**
          * Decode weight from chromosome
@@ -69,7 +69,7 @@ namespace ga::core
          * @param lb: Lowerbound for the weight to be encoded
          * @param ub: Upperbound for the weight to be encoded
          */
-        void addChoromosome(const double &lb, const double &ub);
+        void addChoromosome(double lb, double ub);
 
         /// Chromosomes in the Genome
         std::vector<Chromosome> chromosomes;

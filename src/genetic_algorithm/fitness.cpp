@@ -8,9 +8,7 @@ static void normalize(std::vector<double> &array)
     const auto [min, max] = std::minmax_element(begin(array), end(array));
 
     for (size_t i = 0; i < array.size(); i++)
-    {
         array[i] = (array[i] - *min) / (*max - *min);
-    }
 }
 
 namespace ga::fitness
@@ -57,9 +55,7 @@ namespace ga::fitness
         const darr5_t metrics = _getMetrics(performance);
 
         for (size_t i = 0; i < 5; i++)
-        {
             fitness += m_Weights[i] * metrics[i];
-        }
 
         // We are trying to minimise the weighted average, hence goes in denominator
         double weightSum = 0;
@@ -68,9 +64,7 @@ namespace ga::fitness
         fitness = 10000 * weightSum / fitness;
 
         if (fitness > 1000)
-        {
             DEBUG_LOG("Abnormal fitness value");
-        }
 
         return fitness;
     }

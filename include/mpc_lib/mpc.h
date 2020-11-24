@@ -16,7 +16,7 @@ namespace mpc::utils
      * 
      * @return Result
      */
-    double polyeval(const Eigen::VectorXd &coeffs, const double &x);
+    double polyeval(const Eigen::VectorXd &coeffs, double x);
 
     /**
      * Find best fit polynomial coefficients
@@ -27,7 +27,7 @@ namespace mpc::utils
      * 
      * @return The coefficients
      */
-    Eigen::VectorXd polyfit(const Eigen::VectorXd &xvals, const Eigen::VectorXd &yvals, const size_t &order);
+    Eigen::VectorXd polyfit(const Eigen::VectorXd &xvals, const Eigen::VectorXd &yvals, int order);
 } // namespace mpc::utils
 
 namespace mpc
@@ -89,7 +89,7 @@ namespace mpc
          * 
          * Initialises all indicies based on the timesteps
          */
-        explicit VarIndices(const size_t &timesteps);
+        explicit VarIndices(size_t timesteps);
     };
 
     /// Main class for MPC implementation
@@ -121,9 +121,9 @@ namespace mpc
         std::vector<double> solve(Eigen::VectorXd &state);
 
     private:
-        const VarIndices m_VarIndices;
         const Params m_Params;
         const Eigen::VectorXd m_Coeffs;
+        const VarIndices m_VarIndices;
     };
 } // namespace mpc
 

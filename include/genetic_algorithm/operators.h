@@ -10,8 +10,6 @@
  */
 namespace ga::operators::mutation
 {
-    static double MUTATION_PROBABILITY = 0.03;
-
     /**
      * Select one or more random bits and flip them. Used in binary encoded GAs.
      * 
@@ -19,7 +17,7 @@ namespace ga::operators::mutation
      * 
      * @return New mutated genome
      */
-    ga::core::Genome bit_flip(const ga::core::Genome &genome);
+    ga::core::Genome bitFlip(const ga::core::Genome &genome, double mutationProbability = 0.03);
 
 } // namespace ga::operators::mutation
 

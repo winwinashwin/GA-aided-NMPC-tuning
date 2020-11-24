@@ -9,9 +9,9 @@ int main(int argc, char **argv)
 
     const auto gaConfig = config::ConfigHandler<config::GA>::getGAConfig();
 
-    const size_t &popSize = gaConfig.general.population_size;
-    const size_t &matingPoolSize = gaConfig.general.mating_pool_size;
-    const size_t &numberOfGenerations = gaConfig.general.generations;
+    const size_t popSize = gaConfig.general.population_size;
+    const size_t matingPoolSize = gaConfig.general.mating_pool_size;
+    const size_t numberOfGenerations = gaConfig.general.generations;
 
     std::unique_ptr<ga::Population> newPopulation(new ga::Population(popSize, matingPoolSize));
 

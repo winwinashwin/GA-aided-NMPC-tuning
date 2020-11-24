@@ -40,7 +40,7 @@ namespace model
          * 
          * @param sampletime: The sampletime
          */
-        void setSampleTime(const double &sampletime);
+        void setSampleTime(double sampletime);
 
         /**
          * Update the model state by one timestep
@@ -48,7 +48,7 @@ namespace model
          * @param speed: The speed of the model
          * @param omega: The angular velocity
          */
-        void step(const double &speed, const double &omega);
+        void step(double speed, double omega);
 
         /**
          * Get current state of the model

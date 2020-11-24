@@ -1,7 +1,4 @@
-_bin 
-_build
-data*
-
-.vscode
-
+bin 
+build
 venv
+data

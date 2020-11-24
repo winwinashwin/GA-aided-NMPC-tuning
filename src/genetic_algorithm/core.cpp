@@ -2,7 +2,7 @@
 
 namespace ga::core
 {
-    Chromosome::Chromosome(const double &lb, const double &ub) : LB(lb),
+    Chromosome::Chromosome(double lb, double ub) : LB(lb),
                                                                  UB(ub)
     {
     }
@@ -19,11 +19,11 @@ namespace ga::core
      * 
      *      x = lb + x' * ((ub - lb) / (2^(n) - 1))
      */
-    void Chromosome::encodeWeight(const double &weight)
+    void Chromosome::encodeWeight(double weight)
     {
         // Scale the bitset representation such that value is within
         // the lb and ub of the chromosome.
-        const double &factor = (UB - LB) / (pow(2, __MAX_LEN) - 1);
+        const double factor = (UB - LB) / (pow(2, __MAX_LEN) - 1);
         genes = std::bitset<__MAX_LEN>(static_cast<int>((weight - LB) / factor));
     }
 
@@ -31,7 +31,7 @@ namespace ga::core
     {
         // Scale back the representation such that value is within
         // the lb and ub of the chromosome.
-        const auto &value = genes.to_ulong();
+        const auto value = genes.to_ulong();
         double factor = (UB - LB) / (pow(2, __MAX_LEN) - 1);
 
         return (LB + static_cast<double>(value) * factor);
@@ -83,11 +83,8 @@ namespace ga::core
         return weights;
     }
 
-    void Genome::addChoromosome(const double &lb, const double &ub)
+    void Genome::addChoromosome(double lb, double ub)
     {
-        // push_back creates object in the stack and copies to heap. 
-        // We use emplace_back instead to directly create the object in the heap.
-        // Hence no unnecessary copying of chromosomes anywhere.
-        chromosomes.emplace_back(Chromosome(lb, ub));
+        chromosomes.emplace_back(lb, ub);
     }
 } // namespace ga::core

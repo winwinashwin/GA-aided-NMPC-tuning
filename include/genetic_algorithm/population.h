@@ -21,7 +21,7 @@ namespace ga
          * @param size: Size of the population
          * @param matingPoolSize: Size of the mating pool
          */
-        Population(const size_t &size, const size_t &matingPoolSize);
+        Population(size_t size, size_t matingPoolSize);
 
         /**
          * Assign weights to all organisms in the population using uniform random distribution
@@ -47,7 +47,7 @@ namespace ga
          * 
          * @param genCount: The count of generation
          */ 
-        void refresh(const size_t &genCount);
+        void refresh(size_t genCount);
 
         /**
          * Get best set of weights in the population

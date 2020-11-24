@@ -2,37 +2,28 @@
 
 namespace mpc::utils
 {
-    double polyeval(const Eigen::VectorXd &coeffs, const double &x)
+    double polyeval(const Eigen::VectorXd &coeffs, double x)
     {
-
         double result = 0.0;
 
-        for (size_t i = 0; i < coeffs.size(); i++)
-        {
+        for (int i = 0; i < coeffs.size(); i++)
             result += coeffs[i] * pow(x, i);
-        }
 
         return result;
     }
 
-    Eigen::VectorXd polyfit(const Eigen::VectorXd &xvals, const Eigen::VectorXd &yvals, const size_t &order)
+    Eigen::VectorXd polyfit(const Eigen::VectorXd &xvals, const Eigen::VectorXd &yvals, int order)
     {
         assert(xvals.size() == yvals.size());
         assert(order >= 1 && order <= xvals.size() - 1);
         Eigen::MatrixXd A(xvals.size(), order + 1);
 
-        for (size_t i = 0; i < xvals.size(); i++)
-        {
+        for (int i = 0; i < xvals.size(); i++)
             A(i, 0) = 1.0;
-        }
 
-        for (size_t j = 0; j < xvals.size(); j++)
-        {
-            for (size_t i = 0; i < order; i++)
-            {
+        for (int j = 0; j < xvals.size(); j++)
+            for (int i = 0; i < order; i++)
                 A(j, i + 1) = A(j, i) * xvals(j);
-            }
-        }
 
         Eigen::VectorXd result = A.householderQr().solve(yvals);
 
@@ -63,7 +54,7 @@ namespace mpc
     {
     }
 
-    VarIndices::VarIndices(const size_t &timesteps)
+    VarIndices::VarIndices(size_t timesteps)
     {
           x_start = 0;
           y_start = x_start + timesteps;
@@ -153,15 +144,12 @@ namespace mpc
             CppAD::AD<double> f0 = 0.0;
             // CppAD::pow() takes second parameter as const int&, putting counter datatype as size_t throws error
             for (int i = 0; i < m_Coeffs.size(); i++)
-            {
                 f0 += m_Coeffs[i] * CppAD::pow(x0, i);
-            }
 
             CppAD::AD<double> traj_grad0 = 0.0;
             for (int i = 1; i < m_Coeffs.size(); i++)
-            {
                 traj_grad0 += i * m_Coeffs[i] * CppAD::pow(x0, i - 1);
-            }
+
             traj_grad0 = CppAD::atan(traj_grad0);
 
             // The idea here is to constraint this value to be 0.
@@ -185,12 +173,12 @@ namespace mpc
         bool ok = true;
         typedef CppAD::vector<double> Dvector;
 
-        const double &x = state[0];
-        const double &y = state[1];
-        const double &theta = state[2];
-        const double &v = state[3];
-        const double &cte = state[4];
-        const double &etheta = state[5];
+        const double x = state[0];
+        const double y = state[1];
+        const double theta = state[2];
+        const double v = state[3];
+        const double cte = state[4];
+        const double etheta = state[5];
 
         const size_t n_vars = 6 * m_Params.forward.timesteps + 2 * (m_Params.forward.timesteps - 1);
         const size_t n_constraints = 6 * m_Params.forward.timesteps;
@@ -199,9 +187,7 @@ namespace mpc
         // SHOULD BE 0 besides initial state.
         Dvector vars(n_vars);
         for (size_t i = 0; i < n_vars; i++)
-        {
             vars[i] = 0;
-        }
 
         vars[m_VarIndices.x_start] = x;
         vars[m_VarIndices.y_start] = y;
@@ -277,9 +263,7 @@ namespace mpc
         ok &= solution.status == CppAD::ipopt::solve_result<Dvector>::success;
 
         if (!ok)
-        {
             DEBUG_LOG("IPOPT returned unsuccessful solve. Code: " << static_cast<size_t>(solution.status));
-        }
 
         // Cost
         // std::cout << "COST  : " << solution.obj_value << std::endl;

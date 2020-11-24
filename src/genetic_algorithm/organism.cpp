@@ -5,7 +5,7 @@ namespace ga
 {
     Organism::Organism()
     {
-        const auto &mpcConfig = config::ConfigHandler<config::GA>::getMpcConfig();
+        const auto mpcConfig = config::ConfigHandler<config::GA>::getMpcConfig();
 
         m_genome.addChoromosome(mpcConfig.weight_bounds.w_vel.first, mpcConfig.weight_bounds.w_vel.second);
         m_genome.addChoromosome(mpcConfig.weight_bounds.w_cte.first, mpcConfig.weight_bounds.w_cte.second);
@@ -41,7 +41,7 @@ namespace ga
         return m_genome;
     }
 
-    void Organism::setFitness(const double &fitness)
+    void Organism::setFitness(double fitness)
     {
         m_fitness = fitness;
     }
@@ -56,7 +56,7 @@ namespace ga
         m_genome = genome;
     }
 
-    void Organism::saveAsBest(const size_t &genCount)
+    void Organism::saveAsBest(size_t genCount)
     {
         const mpc::Params::Weights &w = getWeights();
 

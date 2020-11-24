@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake Build - Debug",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "build/Debug", "--", "-j8"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "dependsOn": ["preBuild - Debug"],
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "preBuild - Debug",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["-H.", "-Bbuild/Debug", "-DCMAKE_BUILD_TYPE=Debug"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": "$gcc"
+    }
+  ]
+}

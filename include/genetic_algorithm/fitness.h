@@ -53,9 +53,8 @@ namespace ga::fitness
         darr5_t m_Weights;
         darr5_t m_prevMetrics;
 
-        const double m_deltaN;
-
         bool m_started, m_terminated;
+        const double m_deltaN;
     };
 } // namespace ga::fitness
 #endif

@@ -13,12 +13,12 @@ public:
     {
     }
 
-    void show(const double &progress)
+    void show(double progress)
     {
         size_t pos = m_barWidth * progress / 100;
 
         CONSOLE_LOG("[");
-        for (int i = 0; i < m_barWidth; ++i)
+        for (size_t i = 0; i < m_barWidth; ++i)
         {
             if (i < pos)
                 CONSOLE_LOG("=");

@@ -2,21 +2,16 @@
 
 namespace ga::operators::mutation
 {
-    ga::core::Genome bit_flip(const ga::core::Genome &genome)
+    ga::core::Genome bitFlip(const ga::core::Genome &genome, double mutationProbability)
     {
-        DEBUG_LOG("Mutation probability: " << MUTATION_PROBABILITY);
+        DEBUG_LOG("Mutation probability: " << mutationProbability);
         ga::core::Genome newGenome = genome;
 
         for (auto &chrom : newGenome.chromosomes)
-        {
             for (size_t i = 0; i < chrom.genes.size(); i++)
-            {
-                if ((rand() / double(RAND_MAX)) < MUTATION_PROBABILITY)
-                {
+                if ((rand() / double(RAND_MAX)) < mutationProbability)
                     chrom.genes[i] = !chrom.genes[i];
-                }
-            }
-        }
+
         return newGenome;
     }
 } // namespace ga::operators::mutation
@@ -29,8 +24,8 @@ namespace ga::operators::crossover
         ga::core::Genome offspring_1 = parent_1;
         // Genome offspring_2 = parent_2;
 
-        const size_t &chrom_size = parent_1.chromosomes.size();
-        const size_t &n_genes = parent_1.chromosomes[0].genes.size();
+        const size_t chrom_size = parent_1.chromosomes.size();
+        const size_t n_genes = parent_1.chromosomes[0].genes.size();
 
         for (size_t i = 0; i < chrom_size; i++)
         {

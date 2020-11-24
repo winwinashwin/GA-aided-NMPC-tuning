@@ -21,7 +21,7 @@ namespace model
                 std::array<double, 40> ptsx;
                 std::array<double, 40> ptsy;
 
-                const State &state = m_dModel.getState();
+                const State state = m_dModel.getState();
 
                 for (size_t i = 0; i < 40; i++)
                 {
@@ -29,10 +29,10 @@ namespace model
                     ptsy[i] = 0.0;
                 }
 
-                const double &px = state.x;
-                const double &py = state.y;
-                const double &theta = state.theta;
-                const double &v = state.linVel;
+                const double px = state.x;
+                const double py = state.y;
+                const double theta = state.theta;
+                const double v = state.linVel;
                 double omega = state.angVel;
                 double throttle = state.throttle;
 
@@ -52,15 +52,13 @@ namespace model
 
                 Eigen::VectorXd coeffs = mpc::utils::polyfit(ptsx_transform, ptsy_transform, 3);
 
-                const double &cte = mpc::utils::polyeval(coeffs, 0);
-                const double &etheta = -atan(coeffs[1]);
+                const double cte = mpc::utils::polyeval(coeffs, 0);
+                const double etheta = -atan(coeffs[1]);
 
                 if (abs(cte) > 10)
-                {
                     DEBUG_LOG("CTE out of bounds!! Got: " << cte);
-                }
 
-                const double &dt = params.forward.dt;
+                const double dt = params.forward.dt;
                 const double current_px = 0.0 + v * dt;
                 const double current_py = 0.0;
                 const double current_theta = 0.0 + omega * dt;
@@ -132,7 +130,7 @@ namespace model
                 std::array<double, 40> ptsx;
                 std::array<double, 40> ptsy;
 
-                const State &state = m_dModel.getState();
+                const State state = m_dModel.getState();
 
                 for (size_t i = 0; i < 40; i++)
                 {
@@ -140,10 +138,10 @@ namespace model
                     ptsy[i] = 0.0;
                 }
 
-                const double &px = state.x;
-                const double &py = state.y;
-                const double &theta = state.theta;
-                const double &v = state.linVel;
+                const double px = state.x;
+                const double py = state.y;
+                const double theta = state.theta;
+                const double v = state.linVel;
                 double omega = state.angVel;
                 double throttle = state.throttle;
 
@@ -163,15 +161,13 @@ namespace model
 
                 Eigen::VectorXd coeffs = mpc::utils::polyfit(ptsx_transform, ptsy_transform, 3);
 
-                const double &cte = mpc::utils::polyeval(coeffs, 0);
-                const double &etheta = -atan(coeffs[1]);
+                const double cte = mpc::utils::polyeval(coeffs, 0);
+                const double etheta = -atan(coeffs[1]);
 
                 if (abs(cte) > 10)
-                {
                     DEBUG_LOG("CTE out of bounds!! Got: " << cte);
-                }
 
-                const double &dt = params.forward.dt;
+                const double dt = params.forward.dt;
                 const double current_px = 0.0 + v * dt;
                 const double current_py = 0.0;
                 const double current_theta = 0.0 + omega * dt;
