@@ -66,15 +66,14 @@ docker run --rm -it -v $(pwd):/workspace ga_mpc mpc_mono
 ### Compile and run in local machine
 
 ```bash
-git clone https://github.com/ashwin5059198/GA-aided-MPC-tuning
+git clone --recurse-submodules https://github.com/ashwin5059198/GA-aided-MPC-tuning
 cd GA-aided-MPC-tuning
 ```
 
 - Install build dependencies
 
 ```bash
-source setup.bash
-install_build_deps
+sudo apt install yaml
 ```
 
 - Install **IPOPT** solver for NMPC

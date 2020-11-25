@@ -1,6 +1,12 @@
-[submodule "lib/googletest"]
-	path = lib/googletest
+[submodule "lib/yaml-cpp"]
+	path = lib/yaml-cpp
+	url = https://github.com/ashwin5059198/yaml-cpp
+[submodule "lib/jsoncpp"]
+	path = lib/jsoncpp
+	url = https://github.com/ashwin5059198/jsoncpp
+[submodule "lib/g-test"]
+	path = lib/g-test
 	url = https://github.com/google/googletest
-[submodule "lib/google-benchmark"]
-	path = lib/google-benchmark
+[submodule "lib/g-benchmark"]
+	path = lib/g-benchmark
 	url = https://github.com/google/benchmark

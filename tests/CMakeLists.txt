@@ -1,22 +1,14 @@
-enable_testing()
+macro(project_add_test TESTNAME)
+    set(TEST_TARGET test_${TESTNAME})
 
-set(TEST_LIBRARIES
-    gtest
-    gtest_main
-    ${PROJECT_ALIAS}
-)
+    add_executable(${TEST_TARGET} ${ARGN})
+    target_link_libraries(${TEST_TARGET} gtest gtest_main ${PROJECT_ALIAS})
+    target_precompile_headers(${TEST_TARGET} REUSE_FROM ${PROJECT_ALIAS})
 
-add_executable(test_model test_model.cpp)
-target_link_libraries(test_model ${TEST_LIBRARIES})
-target_precompile_headers(test_model REUSE_FROM ${PROJECT_ALIAS})
-add_test(NAME T_models COMMAND test_model)
+    add_test(NAME T_${TESTNAME} COMMAND ${TEST_TARGET})
 
-add_executable(test_ga test_ga_core.cpp test_ga_op.cpp)
-target_link_libraries(test_ga ${TEST_LIBRARIES})
-target_precompile_headers(test_ga REUSE_FROM ${PROJECT_ALIAS})
-add_test(NAME T_genetic_algorithm COMMAND test_ga)
+endmacro(project_add_test)
 
-add_executable(test_mono test_mono.cpp)
-target_link_libraries(test_mono ${TEST_LIBRARIES})
-target_precompile_headers(test_mono REUSE_FROM ${PROJECT_ALIAS})
-add_test(NAME T_MPC_loop COMMAND test_mono)
+project_add_test(model test_model.cpp)
+project_add_test(ga test_ga_core.cpp test_ga_op.cpp)
+project_add_test(mono test_mono.cpp)

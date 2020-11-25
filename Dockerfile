@@ -8,12 +8,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     unzip \
     git \
     gfortran \
+    pkg-config \
     python3.6 \
     python3-pip \
     cppad \
-    libeigen3-dev \
-    libyaml-cpp-dev \
-    libjsoncpp-dev \
     texlive-latex-base \
     texlive-latex-extra \
     texlive-fonts-recommended \
@@ -33,11 +31,11 @@ RUN ln -s /opt/cmake-3.18.4-Linux-x86_64/share/cmake-3.18 /usr/share/cmake-3.18
 # Install Ipopt for MPC (ignore warnings thrown during installation)
 RUN wget --no-check-certificate https://www.coin-or.org/download/source/Ipopt/Ipopt-3.12.7.zip
 RUN unzip Ipopt-3.12.7.zip -d /opt && rm Ipopt-3.12.7.zip
-COPY scripts/install_ipopt.sh /opt/install_ipopt.sh
+COPY scripts/bash/install_ipopt.sh /opt/install_ipopt.sh
 RUN bash /opt/install_ipopt.sh /opt/Ipopt-3.12.7/
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/lib
 
-COPY scripts/entrypoint.sh /mpc-entrypoint.sh
+COPY scripts/bash/entrypoint.sh /mpc-entrypoint.sh
 RUN mkdir /workspace
 WORKDIR /workspace
 

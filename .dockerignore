@@ -1,9 +1,7 @@
-_bin 
-_build
+bin
+build
 data*
 
 .vscode
 
 venv
-
-setup.bash
