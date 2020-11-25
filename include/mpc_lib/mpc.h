@@ -1,8 +1,9 @@
 #ifndef DIFF_DRIVE_MPC_H_
 #define DIFF_DRIVE_MPC_H_
 
-#include "pcheaders.h"
-
+#include "primary.h"
+#include <eigen3/Eigen/Core>
+#include <cppad/cppad.hpp>
 /**
  * Utilities/helpers for NMPC
  */

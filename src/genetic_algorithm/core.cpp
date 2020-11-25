@@ -3,7 +3,7 @@
 namespace ga::core
 {
     Chromosome::Chromosome(double lb, double ub) : LB(lb),
-                                                                 UB(ub)
+                                                   UB(ub)
     {
     }
 

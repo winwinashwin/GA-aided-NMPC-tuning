@@ -1,8 +1,8 @@
 {
   "env": {
     "libInc": [
-      "${workspaceFolder}/lib/googletest/googletest/include",
-      "${workspaceFolder}/lib/google-benchmark/include"
+      "${workspaceFolder}/lib/g-test/googletest/include",
+      "${workspaceFolder}/lib/g-benchmark/include"
     ]
   },
   "configurations": [

@@ -1,7 +1,7 @@
 #ifndef PROGRESS_BAR_H_
 #define PROGRESS_BAR_H_
 
-#include "pcheaders.h"
+#include "primary.h"
 
 class ProgressBar
 {

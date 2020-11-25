@@ -1,4 +1,6 @@
 #include "genetic_algorithm/fitness.h"
+#include <algorithm>
+#include <numeric>
 
 /**
  * Normalize data

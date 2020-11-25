@@ -1,4 +1,5 @@
 #include "model/differential_drive.h"
+#include <cmath>
 
 namespace model
 {

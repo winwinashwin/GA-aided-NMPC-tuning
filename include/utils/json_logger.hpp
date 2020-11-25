@@ -1,7 +1,10 @@
 #ifndef JSON_LOGGER_H_
 #define JSON_LOGGER_H_
 
-#include "pcheaders.h"
+#include "primary.h"
+#include <fstream>
+#include <jsoncpp/json/writer.h>
+#include <string>
 
 /**
  * Log the performance data into JSON files for visualising

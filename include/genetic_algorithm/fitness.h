@@ -1,9 +1,9 @@
 #ifndef GA_FITNESS_H_
 #define GA_FITNESS_H_
 
-#include "pcheaders.h"
+#include "primary.h"
 #include "model/differential_drive.h"
-
+#include <array>
 /**
  * Fitness function
  */

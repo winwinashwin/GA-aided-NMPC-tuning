@@ -4,7 +4,7 @@ project(ga_nmpc_tuning CXX)
 set(PROJECT_ALIAS "gnt")
 
 option(BUILD_TESTS        "Build the tests"          ON)
-option(BUILD_BENCHMARK    "Build benchmark binaries" OFF)
+option(BUILD_BENCHMARK    "Build benchmark binaries" ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -50,8 +50,6 @@ link_libraries(
     jsoncpp
 )
 
-set(PRECOMPILED_HEADER include/pcheaders.h)
-
 set(SOURCE_FILES
     include/utils/config_handler.hpp
     include/utils/json_logger.hpp
@@ -67,12 +65,10 @@ set(SOURCE_FILES
 )
 
 add_library(${PROJECT_ALIAS} ${SOURCE_FILES})
-target_precompile_headers(${PROJECT_ALIAS} PRIVATE ${PRECOMPILED_HEADER})
 
 macro(project_add_target TARGETNAME)
     add_executable(${TARGETNAME} ${ARGN})
     target_link_libraries(${TARGETNAME} ${PROJECT_ALIAS})
-    target_precompile_headers(${TARGETNAME} REUSE_FROM ${PROJECT_ALIAS})
 endmacro(project_add_target)
 
 project_add_target(mpc_mono src/mpc_mono.cpp)
@@ -92,13 +88,6 @@ if(BUILD_TESTS)
     add_subdirectory(lib/g-test)
     add_subdirectory(tests)
 endif()
-
-# pcheaders
-# 472K	mpc_mono
-# 540K	hone_weights
-# real	0m29.671s
-# user	0m27.856s
-# sys	0m1.723s
 
 # ---------------------------------------------------------------------------------------
 # Benchmarking

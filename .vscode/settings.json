@@ -10,6 +10,7 @@
     "build": true
 },
 "files.associations": {
-    "core": "cpp"
+    "core": "cpp",
+    "qr": "cpp"
 }
 }

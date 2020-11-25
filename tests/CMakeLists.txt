@@ -3,7 +3,6 @@ macro(project_add_test TESTNAME)
 
     add_executable(${TEST_TARGET} ${ARGN})
     target_link_libraries(${TEST_TARGET} gtest gtest_main ${PROJECT_ALIAS})
-    target_precompile_headers(${TEST_TARGET} REUSE_FROM ${PROJECT_ALIAS})
 
     add_test(NAME T_${TESTNAME} COMMAND ${TEST_TARGET})
 

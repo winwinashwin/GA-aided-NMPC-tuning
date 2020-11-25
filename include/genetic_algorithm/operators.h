@@ -1,7 +1,7 @@
 #ifndef GA_OPERATORS_H_
 #define GA_OPERATORS_H_
 
-#include "pcheaders.h"
+#include "primary.h"
 #include "genetic_algorithm/core.h"
 
 /**

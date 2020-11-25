@@ -2,6 +2,7 @@
 #include "genetic_algorithm/operators.h"
 #include "genetic_algorithm/fitness.h"
 #include "utils/config_handler.hpp"
+#include <random>
 
 static bool sortByFitness(const ga::Organism &a, const ga::Organism &b)
 {

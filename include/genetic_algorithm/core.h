@@ -1,8 +1,12 @@
 #ifndef GA_CORE_H_
 #define GA_CORE_H_
 
-#include "pcheaders.h"
+#include "primary.h"
 #include "mpc_lib/mpc.h"
+
+#include <string>
+#include <bitset>
+#include <vector>
 
 /**
  * Core components of the genetic algorithm. Includes Genome, chromosomes etc

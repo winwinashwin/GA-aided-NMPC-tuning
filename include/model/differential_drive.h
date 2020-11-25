@@ -1,7 +1,8 @@
 #ifndef MODEL_DIFF_DRIVE_H_
 #define MODEL_DIFF_DRIVE_H_
 
-#include "pcheaders.h"
+#include "primary.h"
+#include <vector>
 
 namespace model
 {

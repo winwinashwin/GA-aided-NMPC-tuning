@@ -1,7 +1,7 @@
 #ifndef GA_ORGANISM_H_
 #define GA_ORGANISM_H_
 
-#include "pcheaders.h"
+#include "primary.h"
 #include "model/differential_drive.h"
 #include "model/base_organism.h"
 #include "genetic_algorithm/core.h"

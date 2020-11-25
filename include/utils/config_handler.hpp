@@ -1,8 +1,9 @@
 #ifndef MPC_CONFIG_PARSER_H_
 #define MPC_CONFIG_PARSER_H_
 
-#include "pcheaders.h"
-
+#include "primary.h"
+#include <type_traits>
+#include <yaml-cpp/yaml.h>
 /**
  * Runtime configurations
  */
