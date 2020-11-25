@@ -70,18 +70,13 @@ git clone --recurse-submodules https://github.com/ashwin5059198/GA-aided-MPC-tun
 cd GA-aided-MPC-tuning
 ```
 
-- Install build dependencies
+- Install **CppAD** and **IPOPT** solver for NMPC
 
 ```bash
-sudo apt install yaml
-```
-
-- Install **IPOPT** solver for NMPC
-
-```bash
+sudo apt install cppad
 wget --no-check-certificate https://www.coin-or.org/download/source/Ipopt/Ipopt-3.12.7.zip
 unzip Ipopt-3.12.7.zip -d /opt && rm Ipopt-3.12.7.zip
-bash /opt/install_ipopt.sh /opt/Ipopt-3.12.7/
+bash ./scripts/bash/install_ipopt.sh /opt/Ipopt-3.12.7/
 export LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/lib
 ```
 
@@ -94,20 +89,23 @@ python -m pip install -r requirements.txt
 - Build
 
 ```bash
-source setup.bash
-build_release
+mkdir build
+cd build
+cmake ..
+make
+cd ..
 ```
 
 - Run binaries (assuming appropriate configurations are set)
 
 ```bash
-./_bin/mpc_mono # or ./_bin/hone_weights
+./bin/mpc_mono # or ./bin/hone_weights
 ```
 
 - Visualise data
 
 ```bash
-python scripts/plot.py
+python scripts/python/plot.py
 ```
 
 ## Nonlinear Model Predictive Control for differential drive
