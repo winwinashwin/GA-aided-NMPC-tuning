@@ -1,5 +1,5 @@
 #include "mpc_lib/mpc.h"
-#include <eigen3/Eigen/QR>
+#include <Eigen/QR>
 #include <cppad/ipopt/solve.hpp>
 
 namespace mpc::utils

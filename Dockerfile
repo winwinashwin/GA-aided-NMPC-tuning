@@ -35,8 +35,9 @@ COPY scripts/bash/install_ipopt.sh /opt/install_ipopt.sh
 RUN bash /opt/install_ipopt.sh /opt/Ipopt-3.12.7/
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/lib
 
-COPY scripts/bash/entrypoint.sh /mpc-entrypoint.sh
+COPY scripts/bash/entrypoint.sh /entrypoint.sh
 RUN mkdir /workspace
+ENV PATH /workspace/build/Release/bin:${PATH}
 WORKDIR /workspace
 
-ENTRYPOINT [ "/mpc-entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]

@@ -1,6 +1,9 @@
 {
   "env": {
     "libInc": [
+      "${workspaceFolder}/lib/Eigen-3.3",
+      "${workspaceFolder}/lib/jsoncpp/include",
+      "${workspaceFolder}/lib/yaml-cpp/include",
       "${workspaceFolder}/lib/g-test/googletest/include",
       "${workspaceFolder}/lib/g-benchmark/include"
     ]

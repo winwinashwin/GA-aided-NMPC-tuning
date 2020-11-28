@@ -124,7 +124,7 @@ class Visualize:
 if __name__ == "__main__":
 
     data_dir = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), "../data")
+        os.path.abspath(__file__)), "../../data")
 
     if not os.path.exists(os.path.join(data_dir, "plots")):
         os.mkdir(os.path.join(data_dir, "plots"))

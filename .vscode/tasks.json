@@ -51,7 +51,7 @@
       "label": "CMake: Clean",
       "type": "shell",
       "command": "rm",
-      "args": ["-r", "bin", "build", "data"],
+      "args": ["-rf", "build", "data"],
       "options": {
         "cwd": "${workspaceFolder}"
       },

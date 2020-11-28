@@ -2,7 +2,7 @@
 #define DIFF_DRIVE_MPC_H_
 
 #include "primary.h"
-#include <eigen3/Eigen/Core>
+#include <Eigen/Core>
 #include <cppad/cppad.hpp>
 /**
  * Utilities/helpers for NMPC

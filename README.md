@@ -89,17 +89,13 @@ python -m pip install -r requirements.txt
 - Build
 
 ```bash
-mkdir build
-cd build
-cmake ..
-make
-cd ..
+cmake -H. -Bbuild && cmake --build build -- -j8
 ```
 
 - Run binaries (assuming appropriate configurations are set)
 
 ```bash
-./bin/mpc_mono # or ./bin/hone_weights
+./build/bin/mpc_mono # or ./build/bin/hone_weights
 ```
 
 - Visualise data
