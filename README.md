@@ -42,6 +42,13 @@ This is an approach to tune the gains of a **Nonlinear Model Predictive Controll
 
 ### Compile and run in docker container
 
+- Clone repository
+
+```bash
+git clone https://github.com/ashwin5059198/GA-aided-MPC-tuning
+cd GA-aided-MPC-tuning
+```
+
 - Build docker image
 
 ```bash
@@ -65,8 +72,10 @@ docker run --rm -it -v $(pwd):/workspace ga_mpc mpc_mono
 
 ### Compile and run in local machine
 
+- Clone repository
+
 ```bash
-git clone --recurse-submodules https://github.com/ashwin5059198/GA-aided-MPC-tuning
+git clone https://github.com/ashwin5059198/GA-aided-MPC-tuning
 cd GA-aided-MPC-tuning
 ```
 
