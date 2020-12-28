@@ -1,6 +1,7 @@
 import math
 
-from lib import nmpc
+import nmpc
+
 import numpy as np
 
 
@@ -61,4 +62,4 @@ def get_params_and_coeffs():
 
 
 def get_state():
-    return nmpc.State(0, 0, 0, 0, 0, 0, -1.81744, -0.6)
+    return nmpc.State(0, 0, 0, 0, -1.81744, -0.6)
