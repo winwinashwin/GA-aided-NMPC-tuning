@@ -1,16 +1,16 @@
 {
   "env": {
     "libInc": [
-      "${workspaceFolder}/lib/Eigen-3.3"
+      "${workspaceFolder}/third_party/Eigen-3.3"
     ]
   },
   "configurations": [
     {
       "name": "GA aided NMPC tuning",
       "intelliSenseMode": "clang-x64",
-      "includePath": ["${libInc}", "${workspaceFolder}/include"],
+      "includePath": ["${libInc}"],
       "defines": [],
-      "compilerPath": "/usr/bin/g++-7",
+      "compilerPath": "/usr/bin/g++",
       "cppStandard": "c++17",
       "browse": {
         "path": ["${workspaceFolder}"],
