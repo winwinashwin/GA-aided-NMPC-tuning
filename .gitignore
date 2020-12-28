@@ -1,4 +1,4 @@
-lib
 obj
 venv
 **/__pycache__
+*.so
