@@ -1,0 +1,10 @@
+[flake8]
+max-line-length = 75
+exclude = 
+    .git
+    __pycache__
+    venv
+    third_party
+ignore = 
+    E402
+    D10
