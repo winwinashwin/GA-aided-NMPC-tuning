@@ -58,23 +58,18 @@ generic__deepcopy__(bp::object copyable, bp::dict memo)
 struct State
 {
     double x, y, theta;
-    double v, omega;
-    double throttle;
+    double v;
     double cte, etheta;
 
     State(double x,
           double y,
           double theta,
           double v,
-          double omega,
-          double throttle,
           double cte,
           double etheta) : x(x),
                            y(y),
                            theta(theta),
                            v(v),
-                           omega(omega),
-                           throttle(throttle),
                            cte(cte),
                            etheta(etheta)
     {
@@ -124,15 +119,13 @@ BOOST_PYTHON_MODULE(nmpc)
 {
     using namespace boost::python;
 
-    class_<State>("State", init<double, double, double, double, double, double, double, double>())
+    class_<State>("State", init<double, double, double, double, double, double>())
         .def("__copy__", &generic__copy__<State>)
         .def("__deepcopy__", &generic__deepcopy__<State>)
         .def_readwrite("x", &State::x)
         .def_readwrite("y", &State::y)
         .def_readwrite("theta", &State::theta)
         .def_readwrite("v", &State::v)
-        .def_readwrite("omega", &State::omega)
-        .def_readwrite("throttle", &State::throttle)
         .def_readwrite("cte", &State::cte)
         .def_readwrite("etheta", &State::etheta);
 

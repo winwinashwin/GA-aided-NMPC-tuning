@@ -58,14 +58,14 @@ namespace mpc
 
     VarIndices::VarIndices(size_t timesteps)
     {
-          x_start = 0;
-          y_start = x_start + timesteps;
-          theta_start = y_start + timesteps;
-          v_start = theta_start + timesteps;
-          cte_start = v_start + timesteps;
-          etheta_start = cte_start + timesteps;
-          omega_start = etheta_start + timesteps;
-          acc_start = omega_start + timesteps - 1;
+        x_start = 0;
+        y_start = x_start + timesteps;
+        theta_start = y_start + timesteps;
+        v_start = theta_start + timesteps;
+        cte_start = v_start + timesteps;
+        etheta_start = cte_start + timesteps;
+        omega_start = etheta_start + timesteps;
+        acc_start = omega_start + timesteps - 1;
     }
 
     MPC::MPC(const Params &params, const Eigen::VectorXd &coeffs) : m_Params(params),
@@ -248,7 +248,10 @@ namespace mpc
         // can uncomment 1 of these and see if it makes a difference or not but
         // if you uncomment both the computation time should go up in orders of
         // magnitude.
+
+#ifdef NDEBUG
         options += "String  sb          yes\n"; // Disables printing IPOPT creator banner
+#endif
         options += "Sparse  true        forward\n";
         options += "Sparse  true        reverse\n";
         // NOTE: Currently the solver has a maximum time limit of 0.5 seconds.
