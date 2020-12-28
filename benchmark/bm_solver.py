@@ -1,8 +1,11 @@
 import sys
-sys.path.append(".")
-from lib import nmpc
-from tests._helpers import get_params_and_coeffs, get_state
 import time
+sys.path.append('.')
+
+import nmpc
+
+from tests._helpers import get_params_and_coeffs, get_state
+
 
 def timer_func(func):
     def function_timer(*args, **kwargs):
@@ -17,6 +20,7 @@ def timer_func(func):
         return value
 
     return function_timer
+
 
 @timer_func
 def NMPC_Solver():
