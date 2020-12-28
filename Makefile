@@ -8,7 +8,6 @@ DEBUG   ?= 0
 
 SRC_DIR    = ./src
 OBJ_DIR    = ./obj
-LIB_DIR    = ./lib
 INC_DIR    = ./third_party/Eigen-3.3 /usr/include/python3.8
 
 SRCS       = $(wildcard ${SRC_DIR}/*.cpp)
@@ -29,16 +28,16 @@ LIBS       = boost_python38 ipopt
 INC_FLAGS  = $(addprefix -I, ${INC_DIR})
 LD_FLAGS   = $(addprefix -l, ${LIBS})
 
-TARGET     = ${LIB_DIR}/nmpc.so
+TARGET     = nmpc.so
 
-.PHONY: all init run test bench clean
-.SILENT: all init run test bench
+.PHONY: all init test bench clean format
+.SILENT: all init test bench format
 
 all: init ${TARGET} test bench
 	printf '=%.0s' {1..70}; echo
 
 init:
-	mkdir -p ${OBJ_DIR} ${LIB_DIR}
+	mkdir -p ${OBJ_DIR}
 	rm -f ${TARGET}
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.cpp
@@ -56,4 +55,7 @@ bench: ${BMS}
 	for bm in $^; do $(PY) $$bm; done
 
 clean:
-	rm -rf obj
+	rm -rf ${OBJ_DIR} ${TARGET}
+
+format:
+	flake8 .
