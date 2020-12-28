@@ -1,4 +1,4 @@
-bin 
-build
+lib
+obj
 venv
-data
+**/__pycache__

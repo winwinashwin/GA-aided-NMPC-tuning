@@ -1,4 +1,4 @@
-#include "mpc_lib/mpc.h"
+#include "mpc.h"
 #include <Eigen/QR>
 #include <cppad/ipopt/solve.hpp>
 

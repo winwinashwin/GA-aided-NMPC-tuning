@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "venv/bin/python",
+  "python.pythonPath": "/home/ashwin/GA-aided-NMPC-tuning/venv/bin/python3",
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,

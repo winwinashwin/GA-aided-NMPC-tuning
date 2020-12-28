@@ -1,7 +1,13 @@
-#ifndef DIFF_DRIVE_MPC_H_
-#define DIFF_DRIVE_MPC_H_
+#pragma once
 
-#include "primary.h"
+#include <iostream>
+
+#ifndef NDEBUG
+#define DEBUG_LOG(x) std::cout << "\n\033[1;33m [ LOG-DEBUG ] \033[0m" << x << "\n\n"
+#else
+#define DEBUG_LOG(x)
+#endif // NDEBUG
+
 #include <Eigen/Core>
 #include <cppad/cppad.hpp>
 /**
@@ -34,10 +40,9 @@ namespace mpc::utils
 namespace mpc
 {
     /// Structure to store maximun and minimum allowed values
-    template <typename __T>
     struct __LH
     {
-        __T min, max;
+        double min, max;
     };
 
     struct Params
@@ -61,7 +66,7 @@ namespace mpc
         /// This stores the constraints
         struct __Limits
         {
-            __LH<double> omega, throttle;
+            __LH omega, throttle;
         } limits;
 
         /// This will be used as the default constraint
@@ -127,5 +132,3 @@ namespace mpc
         const VarIndices m_VarIndices;
     };
 } // namespace mpc
-
-#endif // DIFF_DRIVE_MPC_H_
