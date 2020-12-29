@@ -1,8 +1,8 @@
-SHELL          := /bin/bash
 .DEFAULT_GOAL  := all
+MAKEFLAGS      += -j3 --no-print-directory
 
-CC   = g++
-PY   = python
+CC          = g++
+PY_INTERP  ?= python
 
 DEBUG   ?= 0
 
@@ -31,14 +31,12 @@ LD_FLAGS   = $(addprefix -l, ${LIBS})
 TARGET     = nmpc.so
 
 .PHONY: all init test bench clean format
-.SILENT: all init test bench format
+.SILENT: all test bench format
 
 all: init ${TARGET} test bench
-	printf '=%.0s' {1..70}; echo
 
 init:
 	mkdir -p ${OBJ_DIR}
-	rm -f ${TARGET}
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.cpp
 	$(CC) -c ${C_FLAGS} ${INC_FLAGS} -o $@ $<
@@ -46,13 +44,11 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.cpp
 ${TARGET}: ${OBJS}
 	$(CC) -shared $^ ${LD_FLAGS} -o ${TARGET}
 
-test: ${TESTS}
-	printf '=%.0s' {1..70}; echo
-	$(PY) -m unittest ${TESTS}
+test: ${TESTS} ${TARGET}
+	$(PY_INTERP) -m unittest ${TESTS}
 
-bench: ${BMS}
-	printf '=%.0s' {1..70}; echo
-	for bm in $^; do $(PY) $$bm; done
+bench: test ${BMS} ${TARGET}
+	for bm in ${BMS}; do $(PY_INTERP) $$bm; done
 
 clean:
 	rm -rf ${OBJ_DIR} ${TARGET}
