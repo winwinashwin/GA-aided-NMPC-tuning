@@ -2,22 +2,10 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "CMake: Build - Debug",
+      "label": "GNU Make: Build - Debug",
       "type": "shell",
-      "command": "cmake",
-      "args": ["--build", "build/Debug", "--", "-j8"],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "group": "build",
-      "dependsOn": ["preBuild - Debug"],
-      "problemMatcher": "$gcc"
-    },
-    {
-      "label": "preBuild - Debug",
-      "type": "shell",
-      "command": "cmake",
-      "args": ["-H.", "-Bbuild/Debug", "-DCMAKE_BUILD_TYPE=Debug"],
+      "command": "make",
+      "args": ["DEBUG=1", "PY_INTERP=${config:python.pythonPath}"],
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -25,22 +13,10 @@
       "problemMatcher": "$gcc"
     },
     {
-      "label": "CMake: Build - Release",
+      "label": "GNU Make: Build - Release",
       "type": "shell",
-      "command": "cmake",
-      "args": ["--build", "build/Release", "--", "-j8"],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "group": "build",
-      "dependsOn": ["preBuild - Release"],
-      "problemMatcher": "$gcc"
-    },
-    {
-      "label": "preBuild - Release",
-      "type": "shell",
-      "command": "cmake",
-      "args": ["-H.", "-Bbuild/Release", "-DCMAKE_BUILD_TYPE=Release"],
+      "command": "make",
+      "args": ["PY_INTERP=${config:python.pythonPath}"],
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -48,10 +24,10 @@
       "problemMatcher": "$gcc"
     },
     {
-      "label": "CMake: Clean",
+      "label": "GNU Make: Clean",
       "type": "shell",
-      "command": "rm",
-      "args": ["-rf", "build", "data"],
+      "command": "make",
+      "args": ["PY_INTERP=${config:python.pythonPath}", "clean"],
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -59,27 +35,14 @@
       "problemMatcher": []
     },
     {
-      "label": "CMake: Test - Debug",
+      "label": "GNU Make: Test",
       "type": "shell",
       "command": "make",
-      "args": ["test"],
+      "args": ["PY_INTERP=${config:python.pythonPath}", "test"],
       "options": {
-        "cwd": "${workspaceFolder}/build/Debug"
+        "cwd": "${workspaceFolder}"
       },
       "group": "build",
-      "dependsOn": ["CMake: Build - Debug"],
-      "problemMatcher": "$gcc"
-    },
-    {
-      "label": "CMake: Test - Release",
-      "type": "shell",
-      "command": "make",
-      "args": ["test"],
-      "options": {
-        "cwd": "${workspaceFolder}/build/Release"
-      },
-      "group": "build",
-      "dependsOn": ["CMake: Build - Release"],
       "problemMatcher": "$gcc"
     }
   ]
