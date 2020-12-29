@@ -14,7 +14,7 @@ def timer_func(func):
         end = time.time()
         runtime = end - start
 
-        msg = '[ BENCHMARK ] Function: {func} executed in {time} seconds.'
+        msg = '\n[ BENCHMARK ] Function: {func} executed in {time} seconds.\n'
 
         print(msg.format(func=func.__name__, time=runtime))
         return value
