@@ -6,7 +6,7 @@ project(ga_nmpc_tuning
 )
 set(PROJECT_ALIAS "gnt")
 
-option(BUILD_TESTS        "Build the tests"          OFF)
+option(BUILD_TESTS        "Build the tests"          ON)
 option(BUILD_BENCHMARK    "Build benchmark binaries" OFF)
 
 set(CMAKE_CXX_STANDARD 17)
