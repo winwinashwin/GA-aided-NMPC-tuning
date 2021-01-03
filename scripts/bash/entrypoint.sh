@@ -16,7 +16,10 @@ function consoleLog () {
 }
 
 function preBuild () {
-    rm -rf build
+    if [[ -d build ]]; then
+        read -p "\n? Found build directory. Delete and build from scratch? (y/n): " confirm
+        [[ $confirm == [yY] ]] && rm -rf build
+    fi
 }
 
 function buildProject () {
@@ -24,8 +27,13 @@ function buildProject () {
     cmake --build build/${BUILD_CONFIGURATION} -- -j8
 }
 
+function postBuild () {
+    export LD_LIBRARY_PATH=`pwd`/build/${BUILD_CONFIGURATION}/lib:$LD_LIBRARY_PATH
+    export PATH=`pwd`/build/${BUILD_CONFIGURATION}/bin:$PATH
+}
+
 function plotData () {
-    python3.6 ${DATA_VIS_SCRIPT}
+    python3 ${DATA_VIS_SCRIPT}
 }
 
 function saveData () {
@@ -36,6 +44,7 @@ function saveData () {
 
 preBuild
 buildProject
+postBuild
 verifyOK
 consoleLog "Workspace build complete"
 
