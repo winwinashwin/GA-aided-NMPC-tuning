@@ -1,0 +1,5 @@
+bin 
+build
+venv
+data
+**/__pycache__

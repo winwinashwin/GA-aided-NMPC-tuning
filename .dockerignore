@@ -1,0 +1,7 @@
+bin
+build
+data*
+assets
+.vscode
+venv
+lib
