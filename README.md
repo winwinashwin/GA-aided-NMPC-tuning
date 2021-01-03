@@ -45,7 +45,7 @@ This is an approach to tune the gains of a **Nonlinear Model Predictive Controll
 - Clone repository
 
 ```bash
-git clone https://github.com/ashwin5059198/GA-aided-MPC-tuning
+git clone --recurse-submodules -j4 https://github.com/ashwin5059198/GA-aided-MPC-tuning
 cd GA-aided-MPC-tuning
 ```
 
@@ -75,7 +75,7 @@ docker run --rm -it -v $(pwd):/workspace ga_mpc mpc_mono
 - Clone repository
 
 ```bash
-git clone https://github.com/ashwin5059198/GA-aided-MPC-tuning
+git clone --recurse-submodules -j4 https://github.com/ashwin5059198/GA-aided-MPC-tuning
 cd GA-aided-MPC-tuning
 ```
 
@@ -95,22 +95,12 @@ export LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/lib
 python -m pip install -r requirements.txt
 ```
 
-- Build
+- Build and Run binaries (assuming appropriate configurations are set)
 
 ```bash
-cmake -H. -Bbuild && cmake --build build -- -j8
-```
-
-- Run binaries (assuming appropriate configurations are set)
-
-```bash
-./build/bin/mpc_mono # or ./build/bin/hone_weights
-```
-
-- Visualise data
-
-```bash
-python scripts/python/plot.py
+./scripts/bash/entrypoint.sh mpc_mono
+# or 
+# ./scripts/bash/entrypoint.sh hone_weights
 ```
 
 ## Nonlinear Model Predictive Control for differential drive
