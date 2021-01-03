@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.18)
 
-project(ga_nmpc_tuning 
+project(ga_nmpc_tuning
     VERSION 0.0.1
     LANGUAGES CXX
 )
 set(PROJECT_ALIAS "gnt")
 
-option(BUILD_TESTS        "Build the tests"          ON)
+option(BUILD_TESTS        "Build the tests"          OFF)
 option(BUILD_BENCHMARK    "Build benchmark binaries" OFF)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -30,21 +30,25 @@ file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
 # ---------------------------------------------------------------------------------------
 # Requirements
 # ---------------------------------------------------------------------------------------
-include(cmake/ExternalProjects.cmake)
 
 find_package(PkgConfig REQUIRED)
 
-pkg_check_modules(libCPPAD  REQUIRED  cppad)
-pkg_check_modules(libIPOPT  REQUIRED  ipopt)
+pkg_check_modules(CPPAD  REQUIRED  cppad)
+pkg_check_modules(IPOPT  REQUIRED  ipopt)
+
+add_subdirectory(third_party/jsoncpp)
+add_subdirectory(third_party/yaml-cpp)
+add_subdirectory(third_party/googletest)
+add_subdirectory(third_party/google-benchmark)
 
 include_directories(
-    lib/Eigen-3.3
+    third_party/Eigen-3.3
     include
 )
 
 link_libraries(
-    ${libIPOPT_LIBRARIES}
-    ${libCPPAD_LIBRARIES}
+    ${IPOPT_LIBRARIES}
+    ${CPPAD_LIBRARIES}
     yaml-cpp
     jsoncpp_lib
 )
