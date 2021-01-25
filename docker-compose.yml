@@ -14,7 +14,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      command: hone_weights
-      tty: true
-      volumes: 
-        - ./workspace:/workspace
+    command: hone_weights
+    tty: true
+    volumes: 
+      - ./workspace:/workspace

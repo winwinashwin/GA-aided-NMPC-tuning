@@ -1,3 +1,5 @@
 build
 data
 **/__pycache__
+
+**/*.zip
