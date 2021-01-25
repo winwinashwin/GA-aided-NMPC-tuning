@@ -11,8 +11,6 @@ This is an approach to tune the gains of a **Nonlinear Model Predictive Controll
 - [Dependencies](#dependencies)
 - [Targets](#targets) (Available binaries)
 - [Usage](#usage)
-  - [Compile and run in docker container](#compile-and-run-in-docker-container) (Recommended)
-  - [Compile and run in local machine](#compile-and-run-in-local-machine)
 - Other information
   - [NMPC design for Differential drive](#nonlinear-model-predictive-control-for-differential-drive)
   - [Genetic Algorithm](#genetic-algorithm)
@@ -34,74 +32,35 @@ This is an approach to tune the gains of a **Nonlinear Model Predictive Controll
 
 ## Usage
 
-- [In local machine](#compile-and-run-in-local-machine)
-- [In docker container](#compile-and-run-in-docker-container) (**preferred**)
-  <br/>
-
-**NOTE:** Specify the configurations in the `config` directory before executing binaries
-
-### Compile and run in docker container
+**NOTE:** Specify the configurations in the `workspace/config` directory before executing binaries
 
 - Clone repository
 
 ```bash
-git clone --recurse-submodules -j4 https://github.com/ashwin5059198/GA-aided-NMPC-tuning
+git clone https://github.com/ashwin5059198/GA-aided-NMPC-tuning
 cd GA-aided-MPC-tuning
 ```
 
 - Build docker image
 
 ```bash
-docker build --tag <image-name> .
+docker-compose build
 ```
 
 - Build and run binaries in container
 
 ```bash
-docker run --rm -it -v $(pwd):/workspace <image-name> <binary-name>
+docker-compose run <binary-name>
 ```
 
 Example:
 
 ```bash
-docker build --tag ga_mpc .
-docker run --rm -it -v $(pwd):/workspace ga_mpc mpc_mono
+docker-compose build
+docker-compose run mpc_mono
 ```
 
 **NOTE**: For available binaries, refer [targets](#targets)
-
-### Compile and run in local machine
-
-- Clone repository
-
-```bash
-git clone --recurse-submodules -j4 https://github.com/ashwin5059198/GA-aided-NMPC-tuning
-cd GA-aided-MPC-tuning
-```
-
-- Install **CppAD** and **IPOPT** solver for NMPC
-
-```bash
-sudo apt install cppad
-wget --no-check-certificate https://www.coin-or.org/download/source/Ipopt/Ipopt-3.12.7.zip
-unzip Ipopt-3.12.7.zip -d /opt && rm Ipopt-3.12.7.zip
-bash ./scripts/bash/install_ipopt.sh /opt/Ipopt-3.12.7/
-export LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/lib
-```
-
-- Install python libraries for visualisation
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-- Build and Run binaries (assuming appropriate configurations are set)
-
-```bash
-./scripts/bash/entrypoint.sh mpc_mono
-# or 
-# ./scripts/bash/entrypoint.sh hone_weights
-```
 
 ## Nonlinear Model Predictive Control for differential drive
 

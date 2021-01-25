@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  mpc_mono:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command: mpc_mono
+    tty: true
+    volumes: 
+      - ./workspace:/workspace
+  
+  hone_weights:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      command: hone_weights
+      tty: true
+      volumes: 
+        - ./workspace:/workspace

@@ -1,7 +1,8 @@
-bin
-build
-data*
-assets
+.git
+.gitignore
+
 .vscode
-venv
-lib
+assets
+
+LICENSE
+README.md
